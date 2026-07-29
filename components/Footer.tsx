@@ -52,17 +52,7 @@ export default function Footer() {
     <footer className="border-t border-pink-100 bg-blush-50">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:px-8">
         <div>
-          <div className="flex items-center gap-2.5">
-            <Logo variant="mark" className="h-11 w-11" />
-            <span className="leading-tight">
-              <span className="block font-display text-xl font-bold text-pink-500">
-                MBC
-              </span>
-              <span className="block text-[8px] font-medium tracking-[0.15em] text-pink-400">
-                MARICEL BEAUTY CENTER
-              </span>
-            </span>
-          </div>
+          <Logo className="h-20" />
           <p className="mt-4 text-sm leading-relaxed text-ink-500">
             Beauty, Care, and Confidence
             <br />

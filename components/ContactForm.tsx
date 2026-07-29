@@ -19,6 +19,7 @@ export default function ContactForm() {
     const data = new FormData(e.currentTarget);
     const name = String(data.get("name") ?? "");
     const phone = String(data.get("phone") ?? "");
+    const subject = String(data.get("subject") ?? "");
     const service = String(data.get("service") ?? "");
     const message = String(data.get("message") ?? "");
 
@@ -33,7 +34,7 @@ export default function ContactForm() {
       .join("\n");
 
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(
-      `Website enquiry from ${name}`
+      subject || `Website enquiry from ${name}`
     )}&body=${encodeURIComponent(body)}`;
 
     setSent(true);
@@ -53,6 +54,8 @@ export default function ContactForm() {
       </div>
 
       <input name="email" type="email" placeholder="Email (optional)" className={field} />
+
+      <input name="subject" placeholder="Subject (optional)" className={field} />
 
       <select name="service" defaultValue="" className={field}>
         <option value="">Service of interest (optional)</option>

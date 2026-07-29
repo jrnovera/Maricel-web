@@ -1,0 +1,10 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mbc-dev",
+      "url": "http://localhost:3003",
+      "port": 3003
+    }
+  ]
+}

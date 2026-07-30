@@ -40,9 +40,28 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
     >
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-4 lg:px-8 lg:py-20">
-        {/* Copy */}
-        <div className="order-2 max-w-xl lg:order-1 lg:pr-8">
+      {/* Photo bleeds to the right edge and fills the hero height on desktop;
+          on narrow screens it sits above the copy as a banner. */}
+      <div className="relative h-64 w-full sm:h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[52%]">
+        {slides.map((s, i) => (
+          <Image
+            key={s.image}
+            src={s.image}
+            alt=""
+            fill
+            sizes="(max-width: 1024px) 100vw, 52vw"
+            priority={i === 0}
+            className={`object-cover object-center transition-opacity duration-700 ${
+              i === index ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+        {/* Soft fade so the photo melts into the pink panel. */}
+        <div className="absolute inset-0 bg-gradient-to-t from-pink-100/70 to-transparent lg:bg-gradient-to-r lg:from-pink-100 lg:via-pink-100/25 lg:to-transparent" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-28">
+        <div className="max-w-xl lg:max-w-[46%]">
           <p className="text-[10px] font-semibold tracking-[0.25em] text-ink-500 sm:text-xs">
             {slide.eyebrow.toUpperCase()}
           </p>
@@ -62,25 +81,6 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
           </p>
 
           <BookButton className="mt-7" />
-        </div>
-
-        {/* Image */}
-        <div className="order-1 lg:order-2">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[999px_999px_24px_24px] sm:max-w-md lg:max-w-none lg:aspect-[5/6]">
-            {slides.map((s, i) => (
-              <Image
-                key={s.image}
-                src={s.image}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 90vw, 45vw"
-                priority={i === 0}
-                className={`object-cover transition-opacity duration-700 ${
-                  i === index ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </div>
 

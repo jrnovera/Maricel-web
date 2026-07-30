@@ -50,7 +50,7 @@ export default async function SuccessPage({
 
       <Link
         href="/"
-        className="mt-8 inline-flex rounded-full bg-pink-500 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-pink-600"
+        className="mt-8 inline-flex rounded-lg bg-pink-500 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-pink-600"
       >
         Back to Home
       </Link>

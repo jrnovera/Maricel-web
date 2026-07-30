@@ -18,7 +18,9 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-pink-100 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="shrink-0">
-          <Logo className="h-14 sm:h-20" />
+          <span className="flex h-16 w-16 items-center justify-center rounded-full border border-pink-200 bg-white p-1.5 sm:h-20 sm:w-20 sm:p-2">
+            <Logo className="h-full w-full" />
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
@@ -49,7 +51,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <Link
             href="/appointment"
-            className="hidden items-center gap-2 rounded-full border border-pink-400 px-5 py-2.5 text-sm font-medium text-pink-500 transition-colors hover:bg-pink-500 hover:text-white sm:flex"
+            className="hidden items-center gap-2 rounded-lg bg-pink-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-pink-600 sm:flex"
           >
             <CalendarCheck size={16} strokeWidth={1.75} />
             Book Appointment
@@ -92,7 +94,7 @@ export default function Header() {
             })}
             <Link
               href="/appointment"
-              className="mt-2 flex items-center justify-center gap-2 rounded-full bg-pink-500 px-5 py-3 text-sm font-medium text-white"
+              className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-pink-500 px-5 py-3 text-sm font-medium text-white"
             >
               <CalendarCheck size={16} strokeWidth={1.75} />
               Book Appointment

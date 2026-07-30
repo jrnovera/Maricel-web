@@ -116,6 +116,7 @@ export default function ServicesPage() {
           title="Ready to look and feel your best?"
           subtitle="Book your appointment today and let our experts pamper you with the care you deserve."
           buttonLabel="BOOK APPOINTMENT"
+          variant="deep"
         />
       </div>
     </div>

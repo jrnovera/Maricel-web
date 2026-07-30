@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Phone, Clock, MousePointerClick, CalendarClock, CheckCircle2, Headset } from "lucide-react";
+import { Phone, Clock, MousePointerClick, CalendarClock, CheckCircle2, Headset, ChevronRight } from "lucide-react";
 import { SplitHero, CtaBanner, Eyebrow } from "@/components/ui";
 import AppointmentForm from "@/components/AppointmentForm";
 import { images, contact } from "@/lib/site";
@@ -156,9 +156,10 @@ export default async function AppointmentPage() {
           </div>
           <a
             href="/contact"
-            className="inline-flex shrink-0 rounded-full border border-pink-400 px-6 py-2.5 text-sm font-medium text-pink-500 transition-colors hover:bg-pink-500 hover:text-white"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-pink-400 px-6 py-2.5 text-sm font-medium text-pink-500 transition-colors hover:bg-pink-500 hover:text-white"
           >
             Contact Us
+            <ChevronRight size={15} strokeWidth={2} />
           </a>
         </div>
       </section>

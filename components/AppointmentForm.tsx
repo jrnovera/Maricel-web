@@ -210,7 +210,7 @@ export default function AppointmentForm({
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-full bg-pink-500 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-pink-600 disabled:opacity-60"
+        className="w-full rounded-lg bg-pink-500 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-pink-600 disabled:opacity-60"
       >
         {pending ? "SENDING…" : "Request Appointment"}
       </button>

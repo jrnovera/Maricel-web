@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { CalendarCheck } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 export function Eyebrow({
   children,
@@ -61,11 +61,13 @@ export function BookButton({
   variant = "solid",
   href = "/appointment",
   className = "",
+  chevron = true,
 }: {
   children?: React.ReactNode;
   variant?: "solid" | "outline" | "white";
   href?: string;
   className?: string;
+  chevron?: boolean;
 }) {
   const styles = {
     solid: "bg-pink-500 text-white hover:bg-pink-600",
@@ -77,10 +79,10 @@ export function BookButton({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors sm:px-7 ${styles} ${className}`}
+      className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-6 py-3 text-sm font-medium transition-colors sm:px-7 ${styles} ${className}`}
     >
-      <CalendarCheck size={16} strokeWidth={1.75} />
       {children}
+      {chevron && <ChevronRight size={16} strokeWidth={2} />}
     </Link>
   );
 }
@@ -109,7 +111,7 @@ export function PageHero({
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/35" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/55 to-transparent" />
         </>
       )}
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
@@ -144,17 +146,35 @@ export function SplitHero({
   subtitle,
   image,
   imageAlt = "",
+  action,
 }: {
   eyebrowLines: string[];
   title: React.ReactNode;
   subtitle?: string;
   image: string;
   imageAlt?: string;
+  action?: React.ReactNode;
 }) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-blush-100 to-pink-100">
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:gap-12 lg:px-8 lg:py-20">
-        <div className="max-w-xl">
+      {/* Photo bleeds to the right edge and fills the hero height on desktop;
+          on narrow screens it sits above the copy as a banner. */}
+      <div className="relative h-56 w-full sm:h-72 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[55%]">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          sizes="(max-width: 1024px) 100vw, 55vw"
+          className="object-cover object-center"
+          priority
+        />
+        {/* Soft fade so the photo melts into the pink panel instead of
+            butting against it with a hard edge. */}
+        <div className="absolute inset-0 bg-gradient-to-t from-pink-50/70 to-transparent lg:bg-gradient-to-r lg:from-pink-50 lg:via-pink-50/25 lg:to-transparent" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-28">
+        <div className="max-w-xl lg:max-w-[46%]">
           {eyebrowLines.map((line, i) => (
             <p
               key={line}
@@ -176,48 +196,59 @@ export function SplitHero({
               {subtitle}
             </p>
           )}
-        </div>
-
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
-          <Image
-            src={image}
-            alt={imageAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-            priority
-          />
+          {action && <div className="mt-7">{action}</div>}
         </div>
       </div>
     </section>
   );
 }
 
-/** Deep-pink call-to-action band that closes most pages. */
+/** Call-to-action band that closes most pages. Soft pink by default, with a
+ *  deep magenta variant used by the services page. */
 export function CtaBanner({
   title,
   subtitle,
   buttonLabel = "Book Appointment",
+  variant = "soft",
 }: {
   title: string;
   subtitle?: string;
   buttonLabel?: string;
+  variant?: "soft" | "deep";
 }) {
+  const deep = variant === "deep";
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-pink-600 to-pink-500 px-6 py-10 sm:px-10 sm:py-12">
+    <section className="mx-auto max-w-7xl px-4 pb-6 sm:px-6 sm:pb-8 lg:px-8">
+      <div
+        className={`relative overflow-hidden rounded-2xl px-6 py-10 sm:px-10 sm:py-12 ${
+          deep
+            ? "bg-gradient-to-r from-pink-600 to-pink-500"
+            : "bg-gradient-to-r from-pink-100 via-blush-100 to-pink-50"
+        }`}
+      >
         <div className="relative flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
           <div>
-            <h2 className="font-display text-2xl text-white sm:text-3xl">
+            <h2
+              className={`font-display text-2xl sm:text-3xl ${
+                deep ? "text-white" : "text-ink-900"
+              }`}
+            >
               {title}
             </h2>
             {subtitle && (
-              <p className="mt-2 max-w-lg text-sm text-pink-100 sm:text-base">
+              <p
+                className={`mt-2 max-w-lg text-sm sm:text-base ${
+                  deep ? "text-pink-100" : "text-ink-500"
+                }`}
+              >
                 {subtitle}
               </p>
             )}
           </div>
-          <BookButton variant="white" className="shrink-0">
+          <BookButton
+            variant={deep ? "white" : "solid"}
+            className="shrink-0"
+          >
             {buttonLabel}
           </BookButton>
         </div>

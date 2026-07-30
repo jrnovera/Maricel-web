@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import Logo from "@/components/Logo";
 import { nav, contact } from "@/lib/site";
 
@@ -30,53 +30,38 @@ function TikTok({ size = 16 }: IconProps) {
   );
 }
 
-function YouTube({ size = 16 }: IconProps) {
+function WhatsApp({ size = 16 }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-      <path d="M21.58 7.19a2.51 2.51 0 0 0-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42a2.51 2.51 0 0 0-1.77 1.77A26.1 26.1 0 0 0 2 12a26.1 26.1 0 0 0 .42 4.81 2.51 2.51 0 0 0 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.51 2.51 0 0 0 1.77-1.77A26.1 26.1 0 0 0 22 12a26.1 26.1 0 0 0-.42-4.81zM10 15.02V8.98L15.2 12 10 15.02z" />
+      <path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.5 1.34 5.02L2 22l5.12-1.34a9.96 9.96 0 0 0 4.92 1.3h.01c5.52 0 10-4.48 10-10s-4.48-10-10.01-10zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3.04.8.81-2.96-.2-.31a8.13 8.13 0 1 1 6.87 3.78zm4.47-6.08c-.24-.12-1.44-.71-1.67-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.15.2-.57.2-1.05.14-1.15-.06-.1-.22-.16-.46-.28z" />
     </svg>
   );
 }
 
 const socials = [
-  { label: "Facebook", href: "#", Icon: Facebook },
   { label: "Instagram", href: "#", Icon: Instagram },
+  { label: "Facebook", href: "#", Icon: Facebook },
   { label: "TikTok", href: "#", Icon: TikTok },
-  { label: "YouTube", href: "#", Icon: YouTube },
+  { label: "WhatsApp", href: "#", Icon: WhatsApp },
 ];
 
 export default function Footer() {
   const half = Math.ceil(nav.length / 2);
 
   return (
-    <footer className="border-t border-pink-100 bg-blush-50">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:px-8">
+    <footer className="border-t border-pink-100 bg-white">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:px-8 lg:py-10">
         <div>
-          <Logo className="h-20" />
-          <p className="mt-4 text-sm leading-relaxed text-ink-500">
-            Beauty, Care, and Confidence
-            <br />
-            in Every Detail.
-          </p>
-          <div className="mt-5 flex gap-2.5">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                aria-label={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 text-white transition-colors hover:bg-pink-600"
-              >
-                <s.Icon size={16} />
-              </a>
-            ))}
-          </div>
+          <span className="flex h-28 w-28 items-center justify-center rounded-full border border-pink-200 bg-white p-3">
+            <Logo className="h-full w-full" />
+          </span>
         </div>
 
         <div>
-          <h3 className="mb-4 text-xs font-semibold tracking-[0.15em] text-pink-500">
+          <h3 className="mb-3 text-xs font-semibold tracking-[0.15em] text-pink-500">
             CONTACT US
           </h3>
-          <ul className="space-y-3 text-sm text-ink-500">
+          <ul className="space-y-2 text-sm text-ink-500">
             <li>
               <a
                 href={contact.phoneHref}
@@ -103,11 +88,11 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="mb-4 text-xs font-semibold tracking-[0.15em] text-pink-500">
+          <h3 className="mb-3 text-xs font-semibold tracking-[0.15em] text-pink-500">
             QUICK LINKS
           </h3>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm">
-            <ul className="space-y-2.5">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+            <ul className="space-y-2">
               {nav.slice(0, half).map((n) => (
                 <li key={n.href}>
                   <Link href={n.href} className="text-ink-500 hover:text-pink-500">
@@ -116,7 +101,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2">
               {nav.slice(half).map((n) => (
                 <li key={n.href}>
                   <Link href={n.href} className="text-ink-500 hover:text-pink-500">
@@ -129,26 +114,27 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="mb-4 text-xs font-semibold tracking-[0.15em] text-pink-500">
-            OPENING HOURS
+          <h3 className="mb-3 text-xs font-semibold tracking-[0.15em] text-pink-500">
+            FOLLOW US
           </h3>
-          <ul className="space-y-3 text-sm text-ink-500">
-            {contact.hours.map((h) => (
-              <li key={h.days} className="flex items-start gap-2.5">
-                <Clock size={15} className="mt-0.5 shrink-0 text-pink-400" />
-                <span>
-                  {h.days}
-                  <br />
-                  {h.time}
-                </span>
-              </li>
+          <div className="flex gap-2.5">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                aria-label={s.label}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 text-white transition-colors hover:bg-pink-600"
+              >
+                <s.Icon size={16} />
+              </a>
             ))}
-          </ul>
+          </div>
+          <p className="mt-4 text-xs text-ink-500">
+            © {new Date().getFullYear()} Maricel Beauty Center.
+            <br />
+            All rights reserved.
+          </p>
         </div>
-      </div>
-
-      <div className="border-t border-pink-100 py-5 text-center text-xs text-ink-500">
-        © {new Date().getFullYear()} Maricel Beauty Center. All rights reserved.
       </div>
     </footer>
   );

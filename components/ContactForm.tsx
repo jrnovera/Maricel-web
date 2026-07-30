@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Send } from "lucide-react";
 import { contact } from "@/lib/site";
 
 const field =
@@ -79,9 +80,10 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full rounded-full bg-pink-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-pink-600"
+        className="flex w-full items-center justify-center gap-2 rounded-lg bg-pink-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-pink-600"
       >
         Send Message
+        <Send size={15} strokeWidth={1.75} />
       </button>
 
       {sent && (

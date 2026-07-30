@@ -114,57 +114,68 @@ export const bodyMassage: ServiceGroup = {
   note: "Selected body rituals by Therma Bliss.",
 };
 
-export const packages = [
+export type BeautyPackage = {
+  name: string;
+  icon: string;
+  includes: string[];
+  duration: string;
+  price: string;
+};
+
+export const packages: BeautyPackage[] = [
   {
-    name: "Bridal Radiance",
-    price: "AED 1,450",
-    desc: "Bridal makeup, hair styling, premium facial, gel manicure and pedicure — everything for your day.",
-    includes: [
-      "Bridal Makeup",
-      "Hair Styling",
-      "Premium Guinot Facial",
-      "Gel Manicure & Pedicure",
-    ],
-    image: "bridal",
-    featured: true,
+    name: "Signature Glow",
+    icon: "skin",
+    includes: ["Facial", "Blow Dry", "Manicure"],
+    duration: "2 hrs",
+    price: "AED 299",
   },
   {
-    name: "Glow & Restore",
-    price: "AED 620",
-    desc: "A reset for tired skin and tired shoulders — hydrating facial paired with a relaxing massage.",
-    includes: [
-      "Hydrating Facial",
-      "Relaxing Massage (60 min)",
-      "Wash & Blow Dry",
-    ],
-    image: "facial",
+    name: "Pamper & Polish",
+    icon: "nails",
+    includes: ["Manicure", "Pedicure", "Foot Spa"],
+    duration: "2.5 hrs",
+    price: "AED 349",
   },
   {
     name: "Hair Revival",
-    price: "AED 780",
-    desc: "Colour, condition and finish — for hair that feels as good as it looks.",
-    includes: ["Root Color", "Hair Spa Treatment", "Wash & Blow Dry"],
-    image: "hair",
+    icon: "hair",
+    includes: ["Hair Spa", "Trim", "Blow Dry"],
+    duration: "2 hrs",
+    price: "AED 399",
   },
   {
-    name: "Nails & Lashes Duo",
-    price: "AED 420",
-    desc: "The everyday polish — gel nails paired with lifted, tinted lashes.",
-    includes: ["Gel Manicure", "Gel Pedicure", "Lash Lift", "Lash Tint"],
-    image: "nails",
+    name: "Bridal Radiance",
+    icon: "makeup",
+    includes: ["Makeup", "Hairstyle", "Facial Prep"],
+    duration: "4 hrs",
+    price: "AED 899",
   },
   {
-    name: "Pure Smooth",
-    price: "AED 330",
-    desc: "Full-body waxing with threading, done gently and hygienically.",
-    includes: ["Full Body Wax", "Eyebrow Threading", "Upper Lip Threading"],
-    image: "skincare",
+    name: "Relax & Renew",
+    icon: "lotus",
+    includes: ["Massage", "Facial", "Body Care"],
+    duration: "3 hrs",
+    price: "AED 449",
   },
   {
-    name: "Weekend Unwind",
-    price: "AED 540",
-    desc: "Two hours to yourself — hot stone therapy, express facial and a classic pedicure.",
-    includes: ["Hot Stone Therapy", "Express Facial", "Classic Pedicure"],
-    image: "massage",
+    name: "VIP Beauty Day",
+    icon: "sparkle",
+    includes: ["Hair", "Nails", "Facial", "Massage"],
+    duration: "3 hrs",
+    price: "AED 1199",
   },
 ];
+
+export const bridalLuxury = {
+  name: "Bridal Luxury Package",
+  price: "AED 1299",
+  duration: "6+ Hours",
+  desc: "Our most exclusive bridal experience crafted to make you look and feel absolutely radiant on your special day.",
+  features: [
+    "Complete Bridal Makeover",
+    "Premium Products",
+    "Personalized Attention",
+    "Lasting Radiance",
+  ],
+};

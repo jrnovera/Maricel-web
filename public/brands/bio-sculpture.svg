@@ -1,0 +1,5 @@
+<svg viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+  <path d="M140 10 L242 40 L140 70 L38 40 Z" fill="none" stroke="#8d8478" stroke-width="1.6" />
+  <text x="140" y="36" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1" fill="#5c554b">BIO</text>
+  <text x="140" y="52" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5" fill="#5c554b">SCULPTURE</text>
+</svg>

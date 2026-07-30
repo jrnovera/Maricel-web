@@ -46,63 +46,39 @@ const socials = [
 ];
 
 export default function Footer() {
-  const half = Math.ceil(nav.length / 2);
+  // Dropdown groups collapse into a flat list here so Gallery and Blog stay
+  // one click away — and crawlable.
+  const links = nav.flatMap((n) => n.children ?? [n]);
 
   return (
     <footer className="border-t border-pink-100 bg-white">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:px-8 lg:py-10">
-        <div>
-          <span className="flex h-28 w-28 items-center justify-center rounded-full border border-pink-200 bg-white p-3">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
+        {/* Brand mark sits inline on small screens so it costs one short row
+            instead of a full-width block. */}
+        <div className="flex items-center gap-3 lg:hidden">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-pink-200 bg-white p-1.5">
             <Logo className="h-full w-full" />
+          </span>
+          <span className="font-display text-base text-ink-900">
+            Maricel Beauty Center
           </span>
         </div>
 
-        <div>
-          <h3 className="mb-3 text-xs font-semibold tracking-[0.15em] text-pink-500">
-            CONTACT US
-          </h3>
-          <ul className="space-y-2 text-sm text-ink-500">
-            <li>
-              <a
-                href={contact.phoneHref}
-                className="flex items-start gap-2.5 hover:text-pink-500"
-              >
-                <Phone size={15} className="mt-0.5 shrink-0 text-pink-400" />
-                {contact.phone}
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${contact.email}`}
-                className="flex items-start gap-2.5 break-all hover:text-pink-500"
-              >
-                <Mail size={15} className="mt-0.5 shrink-0 text-pink-400" />
-                {contact.email}
-              </a>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <MapPin size={15} className="mt-0.5 shrink-0 text-pink-400" />
-              {contact.address}
-            </li>
-          </ul>
-        </div>
+        <div className="mt-5 grid gap-y-6 sm:mt-6 sm:grid-cols-3 sm:gap-6 lg:mt-0 lg:grid-cols-4 lg:gap-8">
+          <div className="hidden lg:block">
+            <span className="flex h-24 w-24 items-center justify-center rounded-full border border-pink-200 bg-white p-3">
+              <Logo className="h-full w-full" />
+            </span>
+          </div>
 
-        <div>
-          <h3 className="mb-3 text-xs font-semibold tracking-[0.15em] text-pink-500">
-            QUICK LINKS
-          </h3>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-            <ul className="space-y-2">
-              {nav.slice(0, half).map((n) => (
-                <li key={n.href}>
-                  <Link href={n.href} className="text-ink-500 hover:text-pink-500">
-                    {n.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-2">
-              {nav.slice(half).map((n) => (
+          <div>
+            <h3 className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-pink-500">
+              QUICK LINKS
+            </h3>
+            {/* Two short columns on phones keeps this block from running the
+                whole height of the screen. */}
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:grid-cols-1">
+              {links.map((n) => (
                 <li key={n.href}>
                   <Link href={n.href} className="text-ink-500 hover:text-pink-500">
                     {n.label}
@@ -111,30 +87,61 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-        </div>
 
-        <div>
-          <h3 className="mb-3 text-xs font-semibold tracking-[0.15em] text-pink-500">
-            FOLLOW US
-          </h3>
-          <div className="flex gap-2.5">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                aria-label={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 text-white transition-colors hover:bg-pink-600"
-              >
-                <s.Icon size={16} />
-              </a>
-            ))}
+          <div>
+            <h3 className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-pink-500">
+              CONTACT US
+            </h3>
+            <ul className="space-y-2.5 text-sm text-ink-500">
+              <li>
+                <a
+                  href={contact.phoneHref}
+                  className="flex items-start gap-2 hover:text-pink-500"
+                >
+                  <Phone size={14} className="mt-0.5 shrink-0 text-pink-400" />
+                  {contact.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="flex items-start gap-2 break-all hover:text-pink-500"
+                >
+                  <Mail size={14} className="mt-0.5 shrink-0 text-pink-400" />
+                  {contact.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin size={14} className="mt-0.5 shrink-0 text-pink-400" />
+                {contact.address}
+              </li>
+            </ul>
           </div>
-          <p className="mt-4 text-xs text-ink-500">
-            © {new Date().getFullYear()} Maricel Beauty Center.
-            <br />
-            All rights reserved.
-          </p>
+
+          <div>
+            <h3 className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-pink-500">
+              FOLLOW US
+            </h3>
+            <div className="flex gap-2.5">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 text-white transition-colors hover:bg-pink-600"
+                >
+                  <s.Icon size={16} />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div className="border-t border-pink-100">
+        <p className="mx-auto max-w-7xl px-4 py-4 text-center text-[11px] text-ink-500 sm:px-6 sm:text-xs lg:px-8">
+          © {new Date().getFullYear()} Maricel Beauty Center. All rights reserved.
+        </p>
       </div>
     </footer>
   );

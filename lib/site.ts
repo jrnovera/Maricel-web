@@ -1,12 +1,30 @@
-export const nav = [
+export type NavItem = {
+  href: string;
+  label: string;
+  children?: { href: string; label: string }[];
+};
+
+export const nav: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
   { href: "/packages", label: "Packages" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/blog", label: "Blog" },
+  {
+    href: "/our-team",
+    label: "Our Team",
+    children: [
+      { href: "/our-team", label: "Our Team" },
+      { href: "/gallery", label: "Gallery" },
+      { href: "/blog", label: "Blog" },
+    ],
+  },
   { href: "/contact", label: "Contact" },
 ];
+
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3003";
+
+export const siteName = "Maricel Beauty Center";
 
 export const contact = {
   phone: "+971 50 123 4567",
@@ -72,11 +90,14 @@ export const galleryCategories = [
   "Spa",
 ] as const;
 
-export const galleryItems: {
+export type GalleryEntry = {
   src: string;
   caption: string;
-  category: (typeof galleryCategories)[number];
-}[] = [
+  category: string;
+};
+
+/** Fallback set shown until staff upload photos in the portal. */
+export const galleryItems: GalleryEntry[] = [
   {
     src: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80",
     caption: "Luxury Salon Interior",
@@ -178,6 +199,66 @@ export const team = [
   },
 ];
 
+export const careers = {
+  eyebrow: "Careers",
+  title: "Join Our Team",
+  body: "We're always looking for passionate, talented beauty professionals to grow with us. If you love making people feel confident and beautiful, we'd love to hear from you.",
+  perks: [
+    {
+      icon: "sparkle",
+      title: "Growth & Training",
+      desc: "Ongoing training with premium brands and techniques.",
+    },
+    {
+      icon: "heart",
+      title: "Supportive Team",
+      desc: "A warm, collaborative environment that feels like family.",
+    },
+    {
+      icon: "crown",
+      title: "Competitive Pay",
+      desc: "Attractive salary, tips and performance incentives.",
+    },
+  ],
+  openings: [
+    "Hair Stylist",
+    "Nail Technician",
+    "Lash & Brow Artist",
+    "Massage Therapist",
+    "Front Desk Receptionist",
+  ],
+};
+
+export const testimonials = [
+  {
+    name: "Amira Al Farsi",
+    role: "Regular Client",
+    quote:
+      "Maricel Beauty Center is my monthly reset. The team is so attentive and the results always exceed what I imagined.",
+    rating: 5,
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    name: "Sofia Martinez",
+    role: "Bridal Client",
+    quote:
+      "They did my bridal makeup and hair — I felt like the best version of myself on my wedding day. Truly grateful!",
+    rating: 5,
+    image:
+      "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    name: "Grace Tan",
+    role: "Facial & Skincare",
+    quote:
+      "The facials here are next level. Clean, relaxing space and products that actually work. Highly recommend.",
+    rating: 5,
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80",
+  },
+];
+
 export const brands = [
   "OPI",
   "ESSIE",
@@ -191,4 +272,26 @@ export const brands = [
   "LOTUS",
   "GUINOT",
   "REFECTOCIL",
+];
+
+/**
+ * Hand-drawn approximations of each brand's wordmark, not the official logo
+ * files. Drop the licensed vector art into /public/brands over these when the
+ * distributor supplies it — the filenames are the only contract.
+ */
+export const brandLogos: { name: string; src: string }[] = [
+  { name: "Kemon", src: "/brands/kemon.svg" },
+  { name: "OPI", src: "/brands/opi.svg" },
+  { name: "Essie", src: "/brands/essie.svg" },
+  { name: "ORLY", src: "/brands/orly.svg" },
+  { name: "evo", src: "/brands/evo.svg" },
+  { name: "Bio Sculpture", src: "/brands/bio-sculpture.svg" },
+  { name: "Guinot", src: "/brands/guinot.svg" },
+  { name: "Lotus Herbals", src: "/brands/lotus.svg" },
+  { name: "Dr Renaud", src: "/brands/dr-renaud.svg" },
+  { name: "RefectoCil", src: "/brands/refectocil.svg" },
+  { name: "Therma Bliss", src: "/brands/therma-bliss.svg" },
+  { name: "Histemo", src: "/brands/histemo.svg" },
+  { name: "Cellula Madre", src: "/brands/cellula-madre.svg" },
+  { name: "SSBB", src: "/brands/ssbb.svg" },
 ];

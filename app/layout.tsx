@@ -3,6 +3,7 @@ import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { siteUrl, siteName } from "@/lib/site";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -17,10 +18,27 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const description =
+  "Premium hair, skin, nail, lash and body treatments in Dubai. Beauty, care and confidence in every detail.";
+
 export const metadata: Metadata = {
-  title: "Maricel Beauty Center — Luxury Beauty, Tailored For You",
-  description:
-    "Premium hair, skin, nail, lash and body treatments in Dubai. Beauty, care and confidence in every detail.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} — Luxury Beauty, Tailored For You`,
+    template: `%s — ${siteName}`,
+  },
+  description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName,
+    locale: "en_AE",
+    url: "/",
+    title: `${siteName} — Luxury Beauty, Tailored For You`,
+    description,
+  },
+  twitter: { card: "summary_large_image" },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

@@ -9,9 +9,10 @@ import {
 } from "@/lib/services-data";
 
 export const metadata: Metadata = {
-  title: "Services & Price List — Maricel Beauty Center",
+  title: "Services & Price List",
   description:
     "Hair, nails, facials, brows & lashes, waxing, makeup and massage. Premium care, tailored beauty, and refined results in Dubai.",
+  alternates: { canonical: "/services" },
 };
 
 function PriceCard({

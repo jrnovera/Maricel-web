@@ -7,9 +7,10 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import type { MbcService } from "@/lib/db";
 
 export const metadata: Metadata = {
-  title: "Book an Appointment — Maricel Beauty Center",
+  title: "Book an Appointment",
   description:
     "Request an appointment at Maricel Beauty Center. Choose your service, date and preferred time.",
+  alternates: { canonical: "/appointment" },
 };
 
 export const dynamic = "force-dynamic";

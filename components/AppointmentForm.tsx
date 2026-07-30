@@ -60,10 +60,6 @@ export default function AppointmentForm({
         setError(result.error);
         return;
       }
-      if (result.checkoutUrl) {
-        window.location.href = result.checkoutUrl;
-        return;
-      }
       router.push(`/appointment/success?booking=${result.bookingId}`);
     });
   }
@@ -190,21 +186,12 @@ export default function AppointmentForm({
       </div>
 
       {selected && (
-        <label className="flex items-start gap-3 rounded-lg border border-pink-200 bg-white p-4">
-          <input
-            type="checkbox"
-            name="payNow"
-            disabled={pending}
-            className="mt-0.5 h-4 w-4 accent-pink-500"
-          />
-          <span className="text-sm text-ink-700">
-            Pay online now
-            <span className="mt-0.5 block text-xs text-ink-500">
-              Secure card payment of AED {Number(selected.price).toLocaleString()}.
-              Leave unticked to pay at the salon.
-            </span>
+        <div className="flex items-center justify-between rounded-lg border border-pink-200 bg-white p-4">
+          <span className="text-sm text-ink-700">Estimated total</span>
+          <span className="text-sm font-medium text-ink-900">
+            {priceLabel(selected)}
           </span>
-        </label>
+        </div>
       )}
 
       <button
@@ -216,7 +203,8 @@ export default function AppointmentForm({
       </button>
 
       <p className="text-center text-xs text-ink-500">
-        Your slot isn&apos;t reserved until we confirm by phone.
+        Your slot isn&apos;t reserved until we confirm by phone. Payment is
+        settled at the salon.
       </p>
     </form>
   );

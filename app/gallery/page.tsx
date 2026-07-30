@@ -2,13 +2,18 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { SplitHero, CtaBanner, Eyebrow } from "@/components/ui";
 import GalleryGrid from "@/components/GalleryGrid";
-import { images, team } from "@/lib/site";
+import { images, team, galleryItems, type GalleryEntry } from "@/lib/site";
+import { createAdminClient } from "@/lib/supabase/admin";
+import type { MbcGalleryItem } from "@/lib/db";
 
 export const metadata: Metadata = {
-  title: "Gallery — Maricel Beauty Center",
+  title: "Gallery",
   description:
     "Explore the elegance of our salon, the artistry of our treatments, and the beautiful results we create every day.",
+  alternates: { canonical: "/gallery" },
 };
+
+export const dynamic = "force-dynamic";
 
 const moments = [
   { src: images.interior, alt: "Maricel Beauty Center reception" },
@@ -16,8 +21,32 @@ const moments = [
   { src: images.bridal, alt: "Stylist working with a client" },
 ];
 
-export default function GalleryPage() {
+/** Staff-uploaded photos win; the curated stock set stands in until then. */
+async function getGallery(): Promise<GalleryEntry[]> {
+  try {
+    const { data } = await createAdminClient()
+      .from("mbc_gallery")
+      .select("id, image, caption, category")
+      .eq("is_active", true)
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false });
+
+    const rows = (data ?? []) as MbcGalleryItem[];
+    if (rows.length === 0) return galleryItems;
+
+    return rows.map((r) => ({
+      src: r.image,
+      caption: r.caption,
+      category: r.category,
+    }));
+  } catch {
+    return galleryItems;
+  }
+}
+
+export default async function GalleryPage() {
   const founder = team[0];
+  const items = await getGallery();
 
   return (
     <div>
@@ -30,7 +59,7 @@ export default function GalleryPage() {
       />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <GalleryGrid />
+        <GalleryGrid items={items} />
       </section>
 
       {/* Moments at MBC */}

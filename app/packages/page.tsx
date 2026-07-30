@@ -13,9 +13,10 @@ import { images } from "@/lib/site";
 import { packages, bridalLuxury } from "@/lib/services-data";
 
 export const metadata: Metadata = {
-  title: "Packages — Maricel Beauty Center",
+  title: "Packages",
   description:
     "Luxury beauty packages designed for you — curated treatments combined for the ultimate convenience, value and experience.",
+  alternates: { canonical: "/packages" },
 };
 
 const whyChoose = [

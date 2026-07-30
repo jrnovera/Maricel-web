@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 import { contact } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Booking Received — Maricel Beauty Center",
+  title: "Booking Received",
 };
 
 export default async function SuccessPage({

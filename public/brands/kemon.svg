@@ -1,0 +1,9 @@
+<svg viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+  <text x="140" y="48" text-anchor="middle" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="40" font-weight="400" letter-spacing="-1" fill="#111111">kemon</text>
+  <g>
+    <rect x="103" y="60" width="8" height="8" fill="#0f8a4a" />
+    <rect x="111" y="60" width="8" height="8" fill="#f2f2f2" />
+    <rect x="119" y="60" width="8" height="8" fill="#cf2027" />
+  </g>
+  <text x="133" y="67" font-family="Arial, sans-serif" font-size="7.5" letter-spacing="1.6" fill="#6f6a77">ITALIAN HAIR FASHION</text>
+</svg>

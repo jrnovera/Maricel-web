@@ -6,13 +6,15 @@ import {
   ServicesGrid,
   SignaturePackagesBand,
   WhyChooseMbc,
+  Testimonials,
 } from "@/components/sections";
 import { images } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Us — Maricel Beauty Center",
+  title: "About Us",
   description:
     "Luxury beauty, tailored for you. Premium treatments, expert care and a relaxing space at Maricel Beauty Center.",
+  alternates: { canonical: "/about" },
 };
 
 const slides: Slide[] = [
@@ -50,6 +52,7 @@ export default function AboutPage() {
       <ServicesGrid />
       <SignaturePackagesBand />
       <WhyChooseMbc />
+      <Testimonials />
 
       <CtaBanner
         title="Ready to Reveal Your Best?"

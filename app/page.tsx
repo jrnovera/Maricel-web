@@ -6,6 +6,7 @@ import {
   SignaturePackagesBand,
   WhyChooseMbc,
 } from "@/components/sections";
+import BrandsMarquee from "@/components/BrandsMarquee";
 import { images } from "@/lib/site";
 
 const slides: Slide[] = [
@@ -41,6 +42,7 @@ export default function Home() {
       <HeroCarousel slides={slides} />
       <AboutIntro />
       <ServicesGrid />
+      <BrandsMarquee />
       <SignaturePackagesBand />
       <WhyChooseMbc />
 

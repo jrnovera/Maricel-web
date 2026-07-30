@@ -5,9 +5,10 @@ import ContactForm from "@/components/ContactForm";
 import { images, contact } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact — Maricel Beauty Center",
+  title: "Contact",
   description:
     "Visit or call Maricel Beauty Center in Dubai. Opening hours, location and enquiries.",
+  alternates: { canonical: "/contact" },
 };
 
 const infoCards = [

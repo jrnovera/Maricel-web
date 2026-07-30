@@ -20,4 +20,16 @@ export type MbcBlogPost = {
   content: string;
   image: string;
   published_at: string;
+  meta_title: string | null;
+  meta_description: string | null;
+  author: string | null;
+  tags: string[] | null;
+  updated_at: string | null;
+};
+
+export type MbcGalleryItem = {
+  id: string;
+  image: string;
+  caption: string;
+  category: string;
 };

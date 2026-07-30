@@ -3,21 +3,24 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Search } from "lucide-react";
-import { galleryCategories, galleryItems } from "@/lib/site";
+import { galleryCategories, type GalleryEntry } from "@/lib/site";
 
-export default function GalleryGrid() {
+export default function GalleryGrid({ items }: { items: GalleryEntry[] }) {
   const [active, setActive] =
     useState<(typeof galleryCategories)[number]>("All");
 
   const filtered =
-    active === "All"
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === active);
+    active === "All" ? items : items.filter((item) => item.category === active);
+
+  // Only offer filters that actually have photos behind them.
+  const tabs = galleryCategories.filter(
+    (cat) => cat === "All" || items.some((item) => item.category === cat)
+  );
 
   return (
     <div>
       <div className="flex flex-wrap justify-center gap-2.5">
-        {galleryCategories.map((cat) => (
+        {tabs.map((cat) => (
           <button
             key={cat}
             onClick={() => setActive(cat)}
@@ -57,6 +60,12 @@ export default function GalleryGrid() {
           </div>
         ))}
       </div>
+
+      {filtered.length === 0 && (
+        <p className="mt-10 text-center text-sm text-ink-500">
+          No photos in this category yet.
+        </p>
+      )}
     </div>
   );
 }

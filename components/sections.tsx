@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Star } from "lucide-react";
 import ServiceIcon from "@/components/ServiceIcon";
 import { SectionHeading, Eyebrow } from "@/components/ui";
-import { images } from "@/lib/site";
+import { images, team, careers, contact, testimonials } from "@/lib/site";
 import { serviceGroups } from "@/lib/services-data";
 
 /**
@@ -177,6 +178,167 @@ export function WhyChooseMbc() {
             <p className="mt-2 text-xs leading-relaxed text-ink-500 sm:text-sm">
               {w.desc}
             </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/** Grid of staff photo cards, used by the Our Team page. */
+export function TeamGrid() {
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+      <SectionHeading
+        eyebrow="Meet The Experts"
+        title="The Faces Behind Your Glow"
+        subtitle="A dedicated team of licensed, passionate beauty professionals ready to take care of you."
+      />
+
+      <div className="mt-10 grid grid-cols-2 gap-5 sm:gap-6 lg:grid-cols-3">
+        {team.map((member) => (
+          <div
+            key={member.name}
+            className="group overflow-hidden rounded-xl border border-pink-100 bg-white"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden">
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <div className="px-4 py-4 text-center sm:py-5">
+              <h3 className="font-display text-base text-ink-900 sm:text-lg">
+                {member.name}
+              </h3>
+              <p className="mt-1 text-xs font-medium tracking-[0.05em] text-pink-500 sm:text-sm">
+                {member.role}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/** "Join Our Team" pitch, perks and open roles — closes the Our Team page. */
+export function CareersSection() {
+  return (
+    <section className="bg-blush-50 py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
+          <div>
+            <Eyebrow>{careers.eyebrow.toUpperCase()}</Eyebrow>
+            <div className="mt-2.5 h-px w-12 bg-pink-300" />
+            <h2 className="mt-4 font-display text-2xl leading-tight text-ink-900 sm:text-3xl lg:text-4xl">
+              {careers.title}
+            </h2>
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-ink-500 sm:text-base">
+              {careers.body}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {careers.openings.map((role) => (
+                <span
+                  key={role}
+                  className="rounded-full border border-pink-200 bg-white px-4 py-1.5 text-xs font-medium text-ink-700 sm:text-sm"
+                >
+                  {role}
+                </span>
+              ))}
+            </div>
+
+            <a
+              href={`mailto:${contact.email}?subject=${encodeURIComponent(
+                "Career Application — Maricel Beauty Center"
+              )}`}
+              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-pink-500 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-pink-600"
+            >
+              Apply Now
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1">
+            {careers.perks.map((perk) => (
+              <div
+                key={perk.title}
+                className="flex items-start gap-4 rounded-xl border border-pink-100 bg-white p-5"
+              >
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+                  <ServiceIcon name={perk.icon} size={22} />
+                </span>
+                <div>
+                  <h3 className="text-sm font-semibold text-ink-900 sm:text-base">
+                    {perk.title}
+                  </h3>
+                  <p className="mt-1 text-xs leading-relaxed text-ink-500 sm:text-sm">
+                    {perk.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Client review cards — used by the About page. */
+export function Testimonials() {
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <SectionHeading
+        eyebrow="Client Love"
+        title="What Our Clients Say"
+        subtitle="Real reviews from clients who trust us with their beauty routine."
+      />
+
+      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        {testimonials.map((t) => (
+          <div
+            key={t.name}
+            className="flex flex-col rounded-xl border border-pink-100 bg-white p-6"
+          >
+            <div className="flex gap-0.5 text-pink-400">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  size={15}
+                  className={
+                    i < t.rating
+                      ? "fill-pink-400"
+                      : "fill-none text-pink-200"
+                  }
+                />
+              ))}
+            </div>
+            <p className="mt-4 flex-1 text-sm leading-relaxed text-ink-700 sm:text-base">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+            <div className="mt-6 flex items-center gap-3">
+              <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full">
+                <Image
+                  src={t.image}
+                  alt={t.name}
+                  fill
+                  sizes="44px"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-ink-900">
+                  {t.name}
+                </p>
+                <p className="text-xs text-ink-500">{t.role}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>

@@ -209,11 +209,13 @@ export function CtaBanner({
   title,
   subtitle,
   buttonLabel = "Book Appointment",
+  buttonHref = "/appointment",
   variant = "soft",
 }: {
   title: string;
   subtitle?: string;
   buttonLabel?: string;
+  buttonHref?: string;
   variant?: "soft" | "deep";
 }) {
   const deep = variant === "deep";
@@ -247,6 +249,7 @@ export function CtaBanner({
           </div>
           <BookButton
             variant={deep ? "white" : "solid"}
+            href={buttonHref}
             className="shrink-0"
           >
             {buttonLabel}

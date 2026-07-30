@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { SplitHero, CtaBanner, Eyebrow } from "@/components/ui";
 import GalleryGrid from "@/components/GalleryGrid";
-import { images, team, galleryItems, type GalleryEntry } from "@/lib/site";
+import { images, founder, galleryItems, type GalleryEntry } from "@/lib/site";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { MbcGalleryItem } from "@/lib/db";
 
@@ -45,7 +45,7 @@ async function getGallery(): Promise<GalleryEntry[]> {
 }
 
 export default async function GalleryPage() {
-  const founder = team[0];
+  const { name: founderName } = founder;
   const items = await getGallery();
 
   return (
@@ -75,7 +75,7 @@ export default async function GalleryPage() {
               detail — to make you feel beautiful, relaxed, and cared for.
             </p>
             <p className="mt-8 font-display text-xl text-ink-900">
-              {founder.name.split(" ")[0]} ♡
+              {founderName.split(" ")[0]} ♡
             </p>
             <p className="text-xs font-semibold tracking-[0.15em] text-pink-500">
               FOUNDER

@@ -19,8 +19,14 @@
   --color-ink-700: #4a4551;
   --color-ink-500: #6f6a77;
 
+  /* Champagne accents used for hero rules and section dividers */
+  --color-gold-200: #ecdcc0;
+  --color-gold-300: #dcc79c;
+  --color-gold-400: #c9a961;
+
   --font-display: var(--font-playfair);
   --font-body: var(--font-poppins);
+  --font-script: var(--font-greatvibes);
 }
 
 html {

@@ -55,20 +55,13 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
         {/* Brand mark sits inline on small screens so it costs one short row
             instead of a full-width block. */}
-        <div className="flex items-center gap-3 lg:hidden">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-pink-200 bg-white p-1.5">
-            <Logo className="h-full w-full" />
-          </span>
-          <span className="font-display text-base text-ink-900">
-            Maricel Beauty Center
-          </span>
+        <div className="lg:hidden">
+          <Logo className="h-11 w-auto" />
         </div>
 
         <div className="mt-5 grid gap-y-6 sm:mt-6 sm:grid-cols-3 sm:gap-6 lg:mt-0 lg:grid-cols-4 lg:gap-8">
           <div className="hidden lg:block">
-            <span className="flex h-24 w-24 items-center justify-center rounded-full border border-pink-200 bg-white p-3">
-              <Logo className="h-full w-full" />
-            </span>
+            <Logo className="h-14 w-auto" />
           </div>
 
           <div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, X, CalendarCheck, ChevronDown } from "lucide-react";
 import Logo from "@/components/Logo";
 import { nav } from "@/lib/site";
@@ -11,12 +11,16 @@ export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [lastPath, setLastPath] = useState(pathname);
 
-  // Close the drawer on navigation so the menu never lingers over a new page
-  useEffect(() => {
+  // Close the drawer on navigation so the menu never lingers over a new page.
+  // Adjusted during render rather than in an effect, so the menu is already
+  // closed on the first paint of the new route.
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
     setOpen(false);
     setOpenGroup(null);
-  }, [pathname]);
+  }
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -24,10 +28,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-pink-100 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="shrink-0">
-          <span className="flex h-16 w-16 items-center justify-center rounded-full border border-pink-200 bg-white p-1.5 sm:h-20 sm:w-20 sm:p-2">
-            <Logo className="h-full w-full" />
-          </span>
+        <Link href="/" className="shrink-0" aria-label="Maricel Beauty Center — home">
+          <Logo className="h-10 w-auto sm:h-12 lg:h-14" />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">

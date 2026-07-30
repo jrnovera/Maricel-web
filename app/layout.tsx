@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Poppins } from "next/font/google";
+import { Playfair_Display, Poppins, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -14,6 +14,14 @@ const playfair = Playfair_Display({
 const poppins = Poppins({
   variable: "--font-poppins",
   weight: ["300", "400", "500", "600"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+/** Calligraphy accent used for the "Meet Our" / "Join Our Team" hero lines. */
+const greatVibes = Great_Vibes({
+  variable: "--font-greatvibes",
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
@@ -45,7 +53,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${poppins.variable}`}>
+    <html
+      lang="en"
+      className={`${playfair.variable} ${poppins.variable} ${greatVibes.variable}`}
+    >
       <body className="min-h-screen flex flex-col antialiased">
         <Header />
         <main className="flex-1">{children}</main>

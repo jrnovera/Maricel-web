@@ -57,9 +57,9 @@ export function SectionHeading({
 }
 
 export function BookButton({
-  children = "Book Appointment",
+  children = "Enquire Now",
   variant = "solid",
-  href = "/appointment",
+  href = "/contact",
   className = "",
   chevron = true,
 }: {
@@ -208,8 +208,8 @@ export function SplitHero({
 export function CtaBanner({
   title,
   subtitle,
-  buttonLabel = "Book Appointment",
-  buttonHref = "/appointment",
+  buttonLabel = "Enquire Now",
+  buttonHref = "/contact",
   variant = "soft",
 }: {
   title: string;

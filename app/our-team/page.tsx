@@ -5,6 +5,7 @@ import ScriptHero from "@/components/ScriptHero";
 import ServiceIcon from "@/components/ServiceIcon";
 import { Eyebrow } from "@/components/ui";
 import { images, teamGroups, type TeamMember } from "@/lib/site";
+import { getHeroRows } from "@/lib/hero";
 
 export const metadata: Metadata = {
   title: "Our Team",
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
     "Meet the therapists, beauty specialists and support team behind Maricel Beauty Center in Dubai.",
   alternates: { canonical: "/our-team" },
 };
+
+export const dynamic = "force-dynamic";
 
 function MemberCard({ member }: { member: TeamMember }) {
   return (
@@ -54,14 +57,19 @@ function GroupHeading({ label, icon }: { label: string; icon: string }) {
   );
 }
 
-export default function OurTeamPage() {
+export default async function OurTeamPage() {
+  const [hero] = await getHeroRows("our-team");
+
   return (
     <div>
       <ScriptHero
-        scriptTop="Meet Our"
-        title="Team"
-        body="A team of passionate professionals dedicated to bringing out your natural beauty and well-being."
-        image={images.teamSalon}
+        scriptTop={hero?.eyebrow ?? "Meet Our"}
+        title={hero?.title_lead ?? "Team"}
+        body={
+          hero?.body ??
+          "A team of passionate professionals dedicated to bringing out your natural beauty and well-being."
+        }
+        image={hero?.image ?? images.teamSalon}
         imageAlt="The styling stations at Maricel Beauty Center"
       />
 
@@ -114,10 +122,10 @@ export default function OurTeamPage() {
 
             <div className="mt-6 flex flex-col items-center gap-3 sm:mt-0 sm:shrink-0 sm:flex-row">
               <Link
-                href="/appointment"
+                href="/contact"
                 className="w-full rounded-lg bg-pink-500 px-7 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-pink-600 sm:w-auto"
               >
-                Book Your Appointment
+                Enquire Now
               </Link>
               <Link
                 href="/careers"

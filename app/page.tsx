@@ -8,8 +8,11 @@ import {
 } from "@/components/sections";
 import BrandsMarquee from "@/components/BrandsMarquee";
 import { images } from "@/lib/site";
+import { getHeroRows } from "@/lib/hero";
 
-const slides: Slide[] = [
+export const dynamic = "force-dynamic";
+
+const fallbackSlides: Slide[] = [
   {
     eyebrow: "Welcome to",
     brand: "Maricel Beauty Center",
@@ -31,12 +34,25 @@ const slides: Slide[] = [
     brand: "Maricel Beauty Center",
     titleLead: "Look Your Best,",
     titleAccent: "Feel Your Best",
-    body: "Bridal makeup, styling and complete pamper packages for the days that matter most. Book a consultation with our beauty experts.",
+    body: "Bridal makeup, styling and complete pamper packages for the days that matter most. Enquire for a consultation with our beauty experts.",
     image: images.bridal,
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const rows = await getHeroRows("home");
+  const slides: Slide[] =
+    rows.length > 0
+      ? rows.map((r) => ({
+          eyebrow: r.eyebrow ?? "",
+          brand: "Maricel Beauty Center",
+          titleLead: r.title_lead,
+          titleAccent: r.title_accent ?? "",
+          body: r.body ?? "",
+          image: r.image,
+        }))
+      : fallbackSlides;
+
   return (
     <div>
       <HeroCarousel slides={slides} />
@@ -48,7 +64,7 @@ export default function Home() {
 
       <CtaBanner
         title="Ready to Reveal Your Best?"
-        subtitle="Book your appointment today and let us take care of you."
+        subtitle="Send us an enquiry today and let us take care of you."
       />
     </div>
   );

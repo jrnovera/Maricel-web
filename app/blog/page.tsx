@@ -6,6 +6,7 @@ import { SplitHero, CtaBanner } from "@/components/ui";
 import { images, siteUrl, siteName } from "@/lib/site";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { MbcBlogPost } from "@/lib/db";
+import { getHeroRows } from "@/lib/hero";
 
 const description =
   "Expert beauty tips, skincare advice and wellness inspiration from the team at Maricel Beauty Center in Dubai.";
@@ -98,9 +99,10 @@ export default async function BlogPage({
   const { page: pageParam, category } = await searchParams;
   const currentPage = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
 
-  const [{ posts, count }, categories] = await Promise.all([
+  const [{ posts, count }, categories, [hero]] = await Promise.all([
     getPosts(currentPage, category),
     getCategories(),
+    getHeroRows("blog"),
   ]);
   const totalPages = Math.max(1, Math.ceil(count / PAGE_SIZE));
 
@@ -129,15 +131,27 @@ export default async function BlogPage({
       />
 
       <SplitHero
-        eyebrowLines={["Our Blog"]}
+        eyebrowLines={[hero?.eyebrow ?? "Our Blog"]}
         title={
-          <>
-            Beauty Tips, Skincare
-            <br />& Self-Care
-          </>
+          hero ? (
+            <>
+              {hero.title_lead}{" "}
+              {hero.title_accent && (
+                <span className="text-pink-500">{hero.title_accent}</span>
+              )}
+            </>
+          ) : (
+            <>
+              Beauty Tips, Skincare
+              <br />& Self-Care
+            </>
+          )
         }
-        subtitle="Expert advice from our stylists and estheticians to help you look and feel your best between visits."
-        image={images.blogRelax}
+        subtitle={
+          hero?.body ??
+          "Expert advice from our stylists and estheticians to help you look and feel your best between visits."
+        }
+        image={hero?.image ?? images.blogRelax}
         imageAlt="Client relaxing with a drink in a robe at the salon"
       />
 
@@ -278,7 +292,7 @@ export default async function BlogPage({
 
       <CtaBanner
         title="Ready to feel beautiful inside and out?"
-        subtitle="Book your appointment today and let our experts take care of you."
+        subtitle="Send us an enquiry today and let our experts take care of you."
       />
     </div>
   );

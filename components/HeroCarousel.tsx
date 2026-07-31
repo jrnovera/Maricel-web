@@ -14,7 +14,7 @@ export type Slide = {
   image: string;
 };
 
-const AUTOPLAY_MS = 6000;
+const AUTOPLAY_MS = 4000;
 
 export default function HeroCarousel({ slides }: { slides: Slide[] }) {
   const [index, setIndex] = useState(0);

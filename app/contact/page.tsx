@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { SplitHero, CtaBanner } from "@/components/ui";
 import ContactForm from "@/components/ContactForm";
 import { images, contact } from "@/lib/site";
+import { getHeroRows } from "@/lib/hero";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
     "Visit or call Maricel Beauty Center in Dubai. Opening hours, location and enquiries.",
   alternates: { canonical: "/contact" },
 };
+
+export const dynamic = "force-dynamic";
 
 const infoCards = [
   {
@@ -31,7 +34,8 @@ const infoCards = [
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [hero] = await getHeroRows("contact");
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     contact.address
   )}`;
@@ -39,14 +43,26 @@ export default function ContactPage() {
   return (
     <div>
       <SplitHero
-        eyebrowLines={["Get in Touch"]}
+        eyebrowLines={[hero?.eyebrow ?? "Get in Touch"]}
         title={
-          <>
-            Contact <span className="text-pink-500">Us</span>
-          </>
+          hero ? (
+            <>
+              {hero.title_lead}{" "}
+              {hero.title_accent && (
+                <span className="text-pink-500">{hero.title_accent}</span>
+              )}
+            </>
+          ) : (
+            <>
+              Contact <span className="text-pink-500">Us</span>
+            </>
+          )
         }
-        subtitle="We're here for you! Whether you have a question, want to learn more about our services, or ready to book your next appointment, our team is happy to assist you."
-        image={images.interior2}
+        subtitle={
+          hero?.body ??
+          "We're here for you! Whether you have a question, want to learn more about our services, or want to send an enquiry, our team is happy to assist you."
+        }
+        image={hero?.image ?? images.interior2}
         imageAlt="Maricel Beauty Center reception"
       />
 
@@ -155,7 +171,7 @@ export default function ContactPage() {
 
       <CtaBanner
         title="Ready to Feel Your Best?"
-        subtitle="Book your appointment today and let us take care of you with love and expertise."
+        subtitle="Send us an enquiry today and let us take care of you with love and expertise."
       />
     </div>
   );

@@ -39,7 +39,7 @@ export function AboutIntro() {
   return (
     <section className="relative py-12 sm:py-16 lg:py-20">
       <div className="lg:grid lg:grid-cols-2 lg:items-center lg:gap-0">
-        <div className="relative h-64 w-full sm:h-80 lg:h-[26rem]">
+        <div className="relative h-64 w-full sm:h-80 lg:ml-8 lg:h-[26rem]">
           <Image
             src={images.interior}
             alt="Inside Maricel Beauty Center"

@@ -32,6 +32,9 @@ export const contact = {
   phoneHref: "tel:+971501234567",
   email: "info@maricelbeauty.ae",
   address: "Dubai, United Arab Emirates",
+  lat: 25.398184,
+  lng: 55.520521,
+  mapsUrl: "https://maps.google.com/?q=25.398184,55.520521",
   hours: [
     { days: "Monday – Saturday", time: "10:00 AM – 8:00 PM" },
     { days: "Sunday", time: "12:00 PM – 6:00 PM" },

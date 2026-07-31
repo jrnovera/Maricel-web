@@ -11,6 +11,7 @@ import {
 } from "@/components/ui";
 import { images } from "@/lib/site";
 import { packages, bridalLuxury } from "@/lib/services-data";
+import { getHeroRows } from "@/lib/hero";
 
 export const metadata: Metadata = {
   title: "Packages",
@@ -18,6 +19,8 @@ export const metadata: Metadata = {
     "Luxury beauty packages designed for you — curated treatments combined for the ultimate convenience, value and experience.",
   alternates: { canonical: "/packages" },
 };
+
+export const dynamic = "force-dynamic";
 
 const whyChoose = [
   {
@@ -44,20 +47,37 @@ const whyChoose = [
 
 const bridalIcons = [Check, Star, Sparkles, Heart];
 
-export default function PackagesPage() {
+export default async function PackagesPage() {
+  const [hero] = await getHeroRows("packages");
+
   return (
     <div>
       <SplitHero
-        eyebrowLines={["Premium Beauty Packages"]}
+        eyebrowLines={[hero?.eyebrow ?? "Premium Beauty Packages"]}
         title={
-          <>
-            Luxury Packages
-            <br />
-            <span className="text-pink-500">Designed For You</span>
-          </>
+          hero ? (
+            <>
+              {hero.title_lead}
+              {hero.title_accent && (
+                <>
+                  <br />
+                  <span className="text-pink-500">{hero.title_accent}</span>
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              Luxury Packages
+              <br />
+              <span className="text-pink-500">Designed For You</span>
+            </>
+          )
         }
-        subtitle="Our thoughtfully curated packages combine multiple treatments for the ultimate convenience, value, and a complete beauty experience."
-        image={images.spaTowels}
+        subtitle={
+          hero?.body ??
+          "Our thoughtfully curated packages combine multiple treatments for the ultimate convenience, value, and a complete beauty experience."
+        }
+        image={hero?.image ?? images.spaTowels}
         imageAlt="Spa candle and towels at Maricel Beauty Center"
         action={<BookButton href="#packages">Explore Packages</BookButton>}
       />
@@ -122,7 +142,7 @@ export default function PackagesPage() {
                 chevron={false}
                 className="mt-4 w-full"
               >
-                Book This Package
+                Enquire About This Package
               </BookButton>
             </div>
           ))}
@@ -183,7 +203,7 @@ export default function PackagesPage() {
                 })}
               </div>
 
-              <BookButton className="mt-7">Book Bridal Package</BookButton>
+              <BookButton className="mt-7">Enquire About Bridal Package</BookButton>
             </div>
           </div>
         </div>
@@ -215,8 +235,8 @@ export default function PackagesPage() {
 
       <CtaBanner
         title="Ready to Pamper Yourself?"
-        subtitle="Book your favorite package today and let us take care of you."
-        buttonLabel="Book Your Package"
+        subtitle="Enquire about your favorite package today and let us take care of you."
+        buttonLabel="Enquire About a Package"
       />
     </div>
   );

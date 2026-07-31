@@ -5,6 +5,7 @@ import ServiceIcon from "@/components/ServiceIcon";
 import RoleList from "@/components/RoleList";
 import { Eyebrow } from "@/components/ui";
 import { images, careers, careerRoles, contact, siteName } from "@/lib/site";
+import { getHeroRows } from "@/lib/hero";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -13,11 +14,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/careers" },
 };
 
+export const dynamic = "force-dynamic";
+
 const applyHref = `mailto:${contact.email}?subject=${encodeURIComponent(
   `Career Application — ${siteName}`
 )}`;
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const [hero] = await getHeroRows("careers");
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": careerRoles.map((role) => ({
@@ -44,10 +49,11 @@ export default function CareersPage() {
       />
 
       <ScriptHero
-        title="Careers"
-        scriptBottom="Join Our Team"
-        body={careers.body}
-        image={images.careersTeam}
+        title={hero?.title_lead ?? "Careers"}
+        scriptTop={hero?.eyebrow ?? undefined}
+        scriptBottom={hero ? undefined : "Join Our Team"}
+        body={hero?.body ?? careers.body}
+        image={hero?.image ?? images.careersTeam}
         imageAlt="Three smiling stylists with scissors and a brush at Maricel Beauty Center"
       />
 

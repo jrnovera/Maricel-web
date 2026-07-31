@@ -274,7 +274,7 @@ export default async function BlogPostPage({
 
       <CtaBanner
         title="Ready to feel beautiful inside and out?"
-        subtitle="Book your appointment today and let our experts take care of you."
+        subtitle="Send us an enquiry today and let our experts take care of you."
       />
     </div>
   );

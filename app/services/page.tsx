@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import ServiceIcon from "@/components/ServiceIcon";
 import { PageHero, CtaBanner } from "@/components/ui";
 import { images, brands } from "@/lib/site";
-import {
-  serviceGroups,
-  bodyMassage,
-  type ServiceGroup,
-} from "@/lib/services-data";
+import { serviceGroups, type ServiceGroup } from "@/lib/services-data";
+import { getHeroRows } from "@/lib/hero";
 
 export const metadata: Metadata = {
   title: "Services & Price List",
@@ -14,6 +11,8 @@ export const metadata: Metadata = {
     "Hair, nails, facials, brows & lashes, waxing, makeup and massage. Premium care, tailored beauty, and refined results in Dubai.",
   alternates: { canonical: "/services" },
 };
+
+export const dynamic = "force-dynamic";
 
 function PriceCard({
   group,
@@ -67,25 +66,35 @@ function PriceCard({
   );
 }
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [hero] = await getHeroRows("services");
+
   return (
     <div>
       <PageHero
-        title="Our Services"
-        subtitle="Premium care, tailored beauty, and refined results."
-        image={images.massage}
+        eyebrow={hero?.eyebrow ?? undefined}
+        title={
+          hero ? (
+            <>
+              {hero.title_lead}{" "}
+              {hero.title_accent && (
+                <span className="text-pink-500">{hero.title_accent}</span>
+              )}
+            </>
+          ) : (
+            "Our Services"
+          )
+        }
+        subtitle={
+          hero?.body ?? "Premium care, tailored beauty, and refined results."
+        }
+        image={hero?.image ?? images.massage}
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {serviceGroups.map((g) => (
-            <PriceCard key={g.slug} group={g} />
-          ))}
-        </div>
-
-        <div className="mt-5">
-          <PriceCard group={bodyMassage} wide />
-        </div>
+      <section className="mx-auto max-w-7xl space-y-5 px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+        {serviceGroups.map((g) => (
+          <PriceCard key={g.slug} group={g} wide />
+        ))}
       </section>
 
       {/* Brand strip */}
@@ -115,8 +124,8 @@ export default function ServicesPage() {
       <div className="pt-14 sm:pt-20">
         <CtaBanner
           title="Ready to look and feel your best?"
-          subtitle="Book your appointment today and let our experts pamper you with the care you deserve."
-          buttonLabel="BOOK APPOINTMENT"
+          subtitle="Send us an enquiry today and let our experts pamper you with the care you deserve."
+          buttonLabel="ENQUIRE NOW"
           variant="deep"
         />
       </div>

@@ -5,6 +5,7 @@ import GalleryGrid from "@/components/GalleryGrid";
 import { images, founder, galleryItems, type GalleryEntry } from "@/lib/site";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { MbcGalleryItem } from "@/lib/db";
+import { getHeroRows } from "@/lib/hero";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -46,15 +47,32 @@ async function getGallery(): Promise<GalleryEntry[]> {
 
 export default async function GalleryPage() {
   const { name: founderName } = founder;
-  const items = await getGallery();
+  const [items, [hero]] = await Promise.all([
+    getGallery(),
+    getHeroRows("gallery"),
+  ]);
 
   return (
     <div>
       <SplitHero
-        eyebrowLines={["Our Gallery"]}
-        title="Beauty in Every Detail"
-        subtitle="Explore the elegance of our salon, the artistry of our treatments, and the beautiful results we create every day."
-        image={images.interior}
+        eyebrowLines={[hero?.eyebrow ?? "Our Gallery"]}
+        title={
+          hero ? (
+            <>
+              {hero.title_lead}{" "}
+              {hero.title_accent && (
+                <span className="text-pink-500">{hero.title_accent}</span>
+              )}
+            </>
+          ) : (
+            "Beauty in Every Detail"
+          )
+        }
+        subtitle={
+          hero?.body ??
+          "Explore the elegance of our salon, the artistry of our treatments, and the beautiful results we create every day."
+        }
+        image={hero?.image ?? images.interior}
         imageAlt="Maricel Beauty Center salon interior"
       />
 
@@ -104,7 +122,7 @@ export default async function GalleryPage() {
 
       <CtaBanner
         title="Ready to experience beauty with care?"
-        subtitle="Book your appointment today and let us bring out the best in you."
+        subtitle="Send us an enquiry today and let us bring out the best in you."
       />
     </div>
   );

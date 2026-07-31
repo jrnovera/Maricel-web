@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import Logo from "@/components/Logo";
 import { nav, contact } from "@/lib/site";
 
@@ -89,21 +89,18 @@ export default function Footer() {
             <p className="mt-2 hidden text-xs leading-relaxed text-ink-500 sm:block">
               Luxury beauty, tailored for you.
             </p>
-          </div>
-
-          <div>
-            <h3 className="mb-2 text-[10px] font-semibold tracking-[0.15em] text-pink-500">
-              QUICK LINKS
-            </h3>
-            <ul className="space-y-1 text-[13px]">
-              {links.map((n) => (
-                <li key={n.href}>
-                  <Link href={n.href} className="text-ink-500 hover:text-pink-500">
-                    {n.label}
-                  </Link>
-                </li>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-pink-300 text-pink-500 transition-colors hover:bg-pink-500 hover:text-white"
+                >
+                  <s.Icon size={14} />
+                </a>
               ))}
-            </ul>
+            </div>
           </div>
 
           <div>
@@ -129,29 +126,50 @@ export default function Footer() {
                   {contact.email}
                 </a>
               </li>
-              <li className="flex items-start gap-1.5">
-                <MapPin size={13} className="mt-0.5 shrink-0 text-pink-400" />
-                {contact.address}
+              <li>
+                <a
+                  href={contact.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-1.5 hover:text-pink-500"
+                >
+                  <MapPin size={13} className="mt-0.5 shrink-0 text-pink-400" />
+                  {contact.address}
+                </a>
               </li>
             </ul>
           </div>
 
-          <div className="col-span-2 sm:col-span-1">
+          <div>
             <h3 className="mb-2 text-[10px] font-semibold tracking-[0.15em] text-pink-500">
-              FOLLOW US
+              QUICK LINKS
             </h3>
-            <div className="flex flex-wrap gap-2">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-pink-300 text-pink-500 transition-colors hover:bg-pink-500 hover:text-white"
-                >
-                  <s.Icon size={14} />
-                </a>
+            <ul className="space-y-1 text-[13px]">
+              {links.map((n) => (
+                <li key={n.href}>
+                  <Link href={n.href} className="text-ink-500 hover:text-pink-500">
+                    {n.label}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-2 text-[10px] font-semibold tracking-[0.15em] text-pink-500">
+              OPENING HOURS
+            </h3>
+            <ul className="space-y-1.5 text-[13px] text-ink-500">
+              {contact.hours.map((h) => (
+                <li key={h.days} className="flex items-start gap-1.5">
+                  <Clock size={13} className="mt-0.5 shrink-0 text-pink-400" />
+                  <span>
+                    <span className="block text-ink-900">{h.days}</span>
+                    {h.time}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

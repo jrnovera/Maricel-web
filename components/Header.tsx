@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, CalendarCheck, ChevronDown } from "lucide-react";
+import { Menu, X, MessageCircle, ChevronDown } from "lucide-react";
 import Logo from "@/components/Logo";
 import { nav } from "@/lib/site";
 
@@ -98,11 +98,11 @@ export default function Header() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/appointment"
+            href="/contact"
             className="hidden items-center gap-2 rounded-lg bg-pink-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-pink-600 sm:flex"
           >
-            <CalendarCheck size={16} strokeWidth={1.75} />
-            Book Appointment
+            <MessageCircle size={16} strokeWidth={1.75} />
+            Enquire Now
           </Link>
 
           <button
@@ -182,11 +182,11 @@ export default function Header() {
               );
             })}
             <Link
-              href="/appointment"
+              href="/contact"
               className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-pink-500 px-5 py-3 text-sm font-medium text-white"
             >
-              <CalendarCheck size={16} strokeWidth={1.75} />
-              Book Appointment
+              <MessageCircle size={16} strokeWidth={1.75} />
+              Enquire Now
             </Link>
           </nav>
         </div>

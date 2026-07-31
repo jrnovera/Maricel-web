@@ -38,11 +38,38 @@ function WhatsApp({ size = 16 }: IconProps) {
   );
 }
 
+function Snapchat({ size = 16 }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+      <path d="M12 2.6c2.85 0 4.9 2.13 5.03 4.83l.01.24.02.87c.02.5.06.7.42.83.24.09.63.11 1.13.03a.7.7 0 0 1 .77.42c.13.32.02.6-.2.85-.19.22-.5.4-.86.58l-.18.09c-.32.16-.5.34-.5.55 0 .17.13.42.55.85.72.74 1.82 1.24 3.09 1.45.32.05.55.34.53.66-.03.6-.83.94-1.83 1.15-.14.03-.19.09-.21.19-.03.13-.05.32-.08.53-.06.42-.44.65-1.02.61l-.36-.03c-.5-.04-1.05-.06-1.5.06-.42.11-.75.36-1.14.68-.63.51-1.42 1.15-2.68 1.15s-2.04-.63-2.67-1.14c-.4-.32-.73-.58-1.15-.69-.3-.08-.66-.09-1.02-.07l-.48.04c-.58.04-.96-.19-1.02-.61-.03-.21-.05-.4-.08-.53-.02-.1-.07-.16-.21-.19-1-.21-1.8-.55-1.83-1.15a.62.62 0 0 1 .53-.66c1.27-.21 2.37-.71 3.09-1.45.42-.43.55-.68.55-.85 0-.21-.18-.39-.5-.55l-.18-.09c-.5-.24-1.1-.55-1.06-1.16a.7.7 0 0 1 .77-.69c.5.08.89.06 1.13-.03.36-.13.4-.33.42-.83l.01-.32.02-.79C7.1 4.73 9.15 2.6 12 2.6z" />
+    </svg>
+  );
+}
+
+function YouTube({ size = 16 }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+      <path d="M21.58 7.2a2.75 2.75 0 0 0-1.94-1.95C17.9 4.75 12 4.75 12 4.75s-5.9 0-7.64.5A2.75 2.75 0 0 0 2.42 7.2 28.8 28.8 0 0 0 1.92 12a28.8 28.8 0 0 0 .5 4.8 2.75 2.75 0 0 0 1.94 1.95c1.74.5 7.64.5 7.64.5s5.9 0 7.64-.5a2.75 2.75 0 0 0 1.94-1.95c.33-1.58.5-3.19.5-4.8a28.8 28.8 0 0 0-.5-4.8zM9.9 15.02V8.98L15.27 12 9.9 15.02z" />
+    </svg>
+  );
+}
+
+function XLogo({ size = 16 }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+      <path d="M13.6 10.62 20.2 3h-1.56l-5.72 6.62L8.36 3H3.2l6.92 10.08L3.2 21h1.56l6.04-7l4.82 7h5.16l-7.18-10.38zM11.46 13.17l-.7-1L5.2 4.13h2.4l4.5 6.44.7 1 5.86 8.38h-2.4l-4.8-6.78z" />
+    </svg>
+  );
+}
+
 const socials = [
   { label: "Instagram", href: "#", Icon: Instagram },
-  { label: "Facebook", href: "#", Icon: Facebook },
   { label: "TikTok", href: "#", Icon: TikTok },
+  { label: "Facebook", href: "#", Icon: Facebook },
   { label: "WhatsApp", href: "#", Icon: WhatsApp },
+  { label: "Snapchat", href: "#", Icon: Snapchat },
+  { label: "YouTube", href: "#", Icon: YouTube },
+  { label: "X", href: "#", Icon: XLogo },
 ];
 
 export default function Footer() {
@@ -52,25 +79,23 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-pink-100 bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
-        {/* Brand mark sits inline on small screens so it costs one short row
-            instead of a full-width block. */}
-        <div className="lg:hidden">
-          <Logo className="h-11 w-auto" />
-        </div>
-
-        <div className="mt-5 grid gap-y-6 sm:mt-6 sm:grid-cols-3 sm:gap-6 lg:mt-0 lg:grid-cols-4 lg:gap-8">
-          <div className="hidden lg:block">
-            <Logo className="h-14 w-auto" />
+      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-9">
+        {/* Three columns from the smallest screen up: the lists are short
+            enough to sit side by side, which keeps the footer to a few rows
+            instead of one tall stack. */}
+        <div className="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-4 sm:gap-6">
+          <div className="col-span-2 sm:col-span-1">
+            <Logo className="h-9 w-auto sm:h-11" />
+            <p className="mt-2 hidden text-xs leading-relaxed text-ink-500 sm:block">
+              Luxury beauty, tailored for you.
+            </p>
           </div>
 
           <div>
-            <h3 className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-pink-500">
+            <h3 className="mb-2 text-[10px] font-semibold tracking-[0.15em] text-pink-500">
               QUICK LINKS
             </h3>
-            {/* Two short columns on phones keeps this block from running the
-                whole height of the screen. */}
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:grid-cols-1">
+            <ul className="space-y-1 text-[13px]">
               {links.map((n) => (
                 <li key={n.href}>
                   <Link href={n.href} className="text-ink-500 hover:text-pink-500">
@@ -82,48 +107,48 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-pink-500">
+            <h3 className="mb-2 text-[10px] font-semibold tracking-[0.15em] text-pink-500">
               CONTACT US
             </h3>
-            <ul className="space-y-2.5 text-sm text-ink-500">
+            <ul className="space-y-1.5 text-[13px] text-ink-500">
               <li>
                 <a
                   href={contact.phoneHref}
-                  className="flex items-start gap-2 hover:text-pink-500"
+                  className="flex items-start gap-1.5 hover:text-pink-500"
                 >
-                  <Phone size={14} className="mt-0.5 shrink-0 text-pink-400" />
+                  <Phone size={13} className="mt-0.5 shrink-0 text-pink-400" />
                   {contact.phone}
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="flex items-start gap-2 break-all hover:text-pink-500"
+                  className="flex items-start gap-1.5 break-all hover:text-pink-500"
                 >
-                  <Mail size={14} className="mt-0.5 shrink-0 text-pink-400" />
+                  <Mail size={13} className="mt-0.5 shrink-0 text-pink-400" />
                   {contact.email}
                 </a>
               </li>
-              <li className="flex items-start gap-2">
-                <MapPin size={14} className="mt-0.5 shrink-0 text-pink-400" />
+              <li className="flex items-start gap-1.5">
+                <MapPin size={13} className="mt-0.5 shrink-0 text-pink-400" />
                 {contact.address}
               </li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-pink-500">
+          <div className="col-span-2 sm:col-span-1">
+            <h3 className="mb-2 text-[10px] font-semibold tracking-[0.15em] text-pink-500">
               FOLLOW US
             </h3>
-            <div className="flex gap-2.5">
+            <div className="flex flex-wrap gap-2">
               {socials.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 text-white transition-colors hover:bg-pink-600"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-pink-300 text-pink-500 transition-colors hover:bg-pink-500 hover:text-white"
                 >
-                  <s.Icon size={16} />
+                  <s.Icon size={14} />
                 </a>
               ))}
             </div>
@@ -132,7 +157,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-pink-100">
-        <p className="mx-auto max-w-7xl px-4 py-4 text-center text-[11px] text-ink-500 sm:px-6 sm:text-xs lg:px-8">
+        <p className="mx-auto max-w-7xl px-4 py-3 text-center text-[11px] text-ink-500 sm:px-6 lg:px-8">
           © {new Date().getFullYear()} Maricel Beauty Center. All rights reserved.
         </p>
       </div>

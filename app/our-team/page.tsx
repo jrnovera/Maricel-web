@@ -61,8 +61,8 @@ export default function OurTeamPage() {
         scriptTop="Meet Our"
         title="Team"
         body="A team of passionate professionals dedicated to bringing out your natural beauty and well-being."
-        image={images.interior}
-        imageAlt="The reception area at Maricel Beauty Center"
+        image={images.teamSalon}
+        imageAlt="The styling stations at Maricel Beauty Center"
       />
 
       <section className="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8">

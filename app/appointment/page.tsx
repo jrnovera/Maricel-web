@@ -67,7 +67,7 @@ export default async function AppointmentPage() {
           </>
         }
         subtitle="Booking your beauty time is quick and easy. We're here to help you look and feel your absolute best."
-        image={images.facial}
+        image={images.nails}
         imageAlt="Treatment room at Maricel Beauty Center"
       />
 

@@ -18,7 +18,10 @@ const AUTOPLAY_MS = 6000;
 
 export default function HeroCarousel({ slides }: { slides: Slide[] }) {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  // Only the arrows/dots pause autoplay — not the whole hero — otherwise
+  // just resting the cursor near the top of the page (to read the copy)
+  // silently stops the slider, which read as "autoplay is broken".
+  const [controlsHovered, setControlsHovered] = useState(false);
 
   const go = useCallback(
     (next: number) => setIndex((next + slides.length) % slides.length),
@@ -26,18 +29,16 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
   );
 
   useEffect(() => {
-    if (paused || slides.length < 2) return;
+    if (controlsHovered || slides.length < 2) return;
     const id = setInterval(() => go(index + 1), AUTOPLAY_MS);
     return () => clearInterval(id);
-  }, [index, paused, go, slides.length]);
+  }, [index, controlsHovered, go, slides.length]);
 
   const slide = slides[index];
 
   return (
     <section
       className="relative overflow-hidden bg-gradient-to-br from-pink-100 via-blush-100 to-pink-50"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
     >
       {/* Photo bleeds to the right edge and fills the hero height on desktop;
@@ -89,6 +90,8 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
         <>
           <button
             onClick={() => go(index - 1)}
+            onMouseEnter={() => setControlsHovered(true)}
+            onMouseLeave={() => setControlsHovered(false)}
             aria-label="Previous slide"
             className="absolute left-2 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-pink-500 shadow-sm transition-colors hover:bg-white sm:flex lg:left-4"
           >
@@ -96,13 +99,19 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
           </button>
           <button
             onClick={() => go(index + 1)}
+            onMouseEnter={() => setControlsHovered(true)}
+            onMouseLeave={() => setControlsHovered(false)}
             aria-label="Next slide"
             className="absolute right-2 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-pink-500 shadow-sm transition-colors hover:bg-white sm:flex lg:right-4"
           >
             <ChevronRight size={20} />
           </button>
 
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+          <div
+            onMouseEnter={() => setControlsHovered(true)}
+            onMouseLeave={() => setControlsHovered(false)}
+            className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2"
+          >
             {slides.map((s, i) => (
               <button
                 key={s.image}

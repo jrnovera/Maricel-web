@@ -32,15 +32,15 @@ const slides: Slide[] = [
     titleLead: "Expert Care,",
     titleAccent: "Every Visit",
     body: "From facials with GUINOT and Dr. Renaud to keratin treatments and gel nails — premium products in the hands of a trained team.",
-    image: images.facial,
+    image: images.lashes,
   },
   {
-    eyebrow: "Bridal & Occasion",
+    eyebrow: "Hair & Styling",
     brand: "Maricel Beauty Center",
-    titleLead: "Look Your Best,",
-    titleAccent: "Feel Your Best",
-    body: "Bridal makeup, styling and complete pamper packages for the days that matter most. Book a consultation with our beauty experts.",
-    image: images.bridal,
+    titleLead: "Styled To",
+    titleAccent: "Perfection",
+    body: "Cuts, colour, keratin and blow-dries by stylists trained on Kemon and evo — finished exactly the way you pictured it.",
+    image: images.hair,
   },
 ];
 

@@ -137,8 +137,8 @@ export default async function BlogPage({
           </>
         }
         subtitle="Expert advice from our stylists and estheticians to help you look and feel your best between visits."
-        image={images.heroWoman}
-        imageAlt="Woman enjoying a relaxing spa moment"
+        image={images.blogRelax}
+        imageAlt="Client relaxing with a drink in a robe at the salon"
       />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">

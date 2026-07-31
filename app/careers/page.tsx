@@ -47,8 +47,8 @@ export default function CareersPage() {
         title="Careers"
         scriptBottom="Join Our Team"
         body={careers.body}
-        image={images.aboutWoman}
-        imageAlt="The team at Maricel Beauty Center"
+        image={images.careersTeam}
+        imageAlt="Three smiling stylists with scissors and a brush at Maricel Beauty Center"
       />
 
       {/* Why work with us */}

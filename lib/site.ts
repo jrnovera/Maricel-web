@@ -43,6 +43,12 @@ export const images = {
     "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80",
   aboutWoman:
     "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1000&q=80",
+  careersTeam:
+    "https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=1000&q=80",
+  teamSalon:
+    "https://images.unsplash.com/photo-1633681140152-3b8726450518?auto=format&fit=crop&w=1200&q=80",
+  blogRelax:
+    "https://images.unsplash.com/photo-1630168258841-ea0ae143ee1f?auto=format&fit=crop&w=1000&q=80",
   interior:
     "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80",
   interior2:

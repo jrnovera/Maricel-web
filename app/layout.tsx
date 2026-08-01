@@ -55,6 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${playfair.variable} ${poppins.variable} ${greatVibes.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased">

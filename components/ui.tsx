@@ -56,6 +56,13 @@ export function SectionHeading({
   );
 }
 
+const bookButtonVariants = {
+  solid: "bg-pink-500 text-white hover:bg-pink-600",
+  outline:
+    "border border-pink-400 text-pink-500 hover:bg-pink-500 hover:text-white",
+  white: "bg-white text-pink-600 hover:bg-pink-50",
+};
+
 export function BookButton({
   children = "Enquire Now",
   variant = "solid",
@@ -69,21 +76,40 @@ export function BookButton({
   className?: string;
   chevron?: boolean;
 }) {
-  const styles = {
-    solid: "bg-pink-500 text-white hover:bg-pink-600",
-    outline:
-      "border border-pink-400 text-pink-500 hover:bg-pink-500 hover:text-white",
-    white: "bg-white text-pink-600 hover:bg-pink-50",
-  }[variant];
-
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-6 py-3 text-sm font-medium transition-colors sm:px-7 ${styles} ${className}`}
+      className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-6 py-3 text-sm font-medium transition-colors sm:px-7 ${bookButtonVariants[variant]} ${className}`}
     >
       {children}
       {chevron && <ChevronRight size={16} strokeWidth={2} />}
     </Link>
+  );
+}
+
+/** Same look as BookButton, but there's no booking system to send visitors
+ *  to yet — a plain, unwired button beats a link to a page that doesn't
+ *  match what it promises. Swap back to BookButton (with a real href) once
+ *  online booking exists. */
+export function StaticBookButton({
+  children = "Book Appointment",
+  variant = "solid",
+  className = "",
+  chevron = true,
+}: {
+  children?: React.ReactNode;
+  variant?: "solid" | "outline" | "white";
+  className?: string;
+  chevron?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-6 py-3 text-sm font-medium transition-colors sm:px-7 ${bookButtonVariants[variant]} ${className}`}
+    >
+      {children}
+      {chevron && <ChevronRight size={16} strokeWidth={2} />}
+    </button>
   );
 }
 
@@ -208,14 +234,12 @@ export function SplitHero({
 export function CtaBanner({
   title,
   subtitle,
-  buttonLabel = "Enquire Now",
-  buttonHref = "/contact",
+  buttonLabel = "Book Appointment",
   variant = "soft",
 }: {
   title: string;
   subtitle?: string;
   buttonLabel?: string;
-  buttonHref?: string;
   variant?: "soft" | "deep";
 }) {
   const deep = variant === "deep";
@@ -247,13 +271,12 @@ export function CtaBanner({
               </p>
             )}
           </div>
-          <BookButton
+          <StaticBookButton
             variant={deep ? "white" : "solid"}
-            href={buttonHref}
             className="shrink-0"
           >
             {buttonLabel}
-          </BookButton>
+          </StaticBookButton>
         </div>
       </div>
     </section>

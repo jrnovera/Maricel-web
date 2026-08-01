@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/reviews" },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const statIcons: Record<
   string,

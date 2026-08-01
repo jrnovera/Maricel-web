@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const values = [
   {
@@ -293,7 +293,7 @@ export default async function AboutPage() {
           "cta.subtitle",
           "Let our experts bring out the best in you. Send us an enquiry today and experience the MBC difference."
         )}
-        buttonLabel={c("cta.button", "Enquire Now")}
+        buttonLabel={c("cta.button", "Book Appointment")}
         variant="deep"
       />
     </div>

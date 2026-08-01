@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, MessageCircle, ChevronDown } from "lucide-react";
+import { Menu, X, Calendar, ChevronDown } from "lucide-react";
 import Logo from "@/components/Logo";
 import { nav } from "@/lib/site";
 
@@ -97,13 +97,14 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/contact"
+          {/* No booking system to send visitors to yet — static on purpose. */}
+          <button
+            type="button"
             className="hidden items-center gap-2 rounded-lg bg-pink-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-pink-600 sm:flex"
           >
-            <MessageCircle size={16} strokeWidth={1.75} />
-            Enquire Now
-          </Link>
+            <Calendar size={16} strokeWidth={1.75} />
+            Book Appointment
+          </button>
 
           <button
             onClick={() => setOpen((o) => !o)}
@@ -182,13 +183,14 @@ export default function Header() {
                 </Link>
               );
             })}
-            <Link
-              href="/contact"
-              className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-pink-500 px-5 py-3 text-sm font-medium text-white"
+            {/* No booking system to send visitors to yet — static on purpose. */}
+            <button
+              type="button"
+              className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-pink-500 px-5 py-3 text-sm font-medium text-white"
             >
-              <MessageCircle size={16} strokeWidth={1.75} />
-              Enquire Now
-            </Link>
+              <Calendar size={16} strokeWidth={1.75} />
+              Book Appointment
+            </button>
           </nav>
         </div>
       )}

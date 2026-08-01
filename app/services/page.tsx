@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 function PriceCard({
   group,
@@ -132,7 +132,7 @@ export default async function ServicesPage() {
             "cta.subtitle",
             "Send us an enquiry today and let our experts pamper you with the care you deserve."
           )}
-          buttonLabel={c("cta.button", "ENQUIRE NOW")}
+          buttonLabel={c("cta.button", "BOOK NOW")}
           variant="deep"
         />
       </div>

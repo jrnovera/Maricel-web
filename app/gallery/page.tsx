@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/gallery" },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const momentsDefaults = [
   { key: "moments.image1", src: images.interior, alt: "Maricel Beauty Center reception" },
@@ -111,7 +111,7 @@ export default async function GalleryPage() {
           "cta.subtitle",
           "Send us an enquiry today and let us bring out the best in you."
         )}
-        buttonLabel={c("cta.button", "Enquire Now")}
+        buttonLabel={c("cta.button", "Book Appointment")}
       />
     </div>
   );

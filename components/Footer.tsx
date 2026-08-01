@@ -63,10 +63,10 @@ function XLogo({ size = 16 }: IconProps) {
 }
 
 const socials = [
-  { label: "Instagram", href: "#", Icon: Instagram },
+  { label: "Instagram", href: "https://www.instagram.com/maricelbeautycenter2023/?hl=en", Icon: Instagram },
   { label: "TikTok", href: "#", Icon: TikTok },
-  { label: "Facebook", href: "#", Icon: Facebook },
-  { label: "WhatsApp", href: "#", Icon: WhatsApp },
+  { label: "Facebook", href: "https://www.facebook.com/maricelbeautycenter/", Icon: Facebook },
+  { label: "WhatsApp", href: "https://wa.me/+971507046489", Icon: WhatsApp },
   { label: "Snapchat", href: "#", Icon: Snapchat },
   { label: "YouTube", href: "#", Icon: YouTube },
   { label: "X", href: "#", Icon: XLogo },

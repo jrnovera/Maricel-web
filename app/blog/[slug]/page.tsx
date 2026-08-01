@@ -8,7 +8,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { siteUrl, siteName } from "@/lib/site";
 import type { MbcBlogPost } from "@/lib/db";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 async function getPost(slug: string): Promise<MbcBlogPost | null> {
   try {

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/careers" },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const applyHref = `mailto:${contact.email}?subject=${encodeURIComponent(
   `Career Application — ${siteName}`

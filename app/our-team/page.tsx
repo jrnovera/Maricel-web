@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/our-team" },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 /** Category tags a staff member can carry on the admin's Staff page, in the
  *  order their sections appear on this page. Mirrors the icons/labels the
@@ -169,12 +169,13 @@ export default async function OurTeamPage() {
             </div>
 
             <div className="mt-6 flex flex-col items-center gap-3 sm:mt-0 sm:shrink-0 sm:flex-row">
-              <Link
-                href="/contact"
+              {/* No booking system to send visitors to yet — static on purpose. */}
+              <button
+                type="button"
                 className="w-full rounded-lg bg-pink-500 px-7 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-pink-600 sm:w-auto"
               >
-                {c("closing.button1", "Enquire Now")}
-              </Link>
+                {c("closing.button1", "Book Appointment")}
+              </button>
               <Link
                 href="/careers"
                 className="w-full rounded-lg border border-pink-400 px-7 py-3 text-center text-sm font-medium text-pink-500 transition-colors hover:bg-pink-500 hover:text-white sm:w-auto"

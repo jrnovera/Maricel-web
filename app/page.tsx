@@ -11,7 +11,7 @@ import { images } from "@/lib/site";
 import { getHeroRows } from "@/lib/hero";
 import { getPageCopy } from "@/lib/content";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const fallbackSlides: Slide[] = [
   {
@@ -72,7 +72,7 @@ export default async function Home() {
           "cta.subtitle",
           "Send us an enquiry today and let us take care of you."
         )}
-        buttonLabel={c("cta.button", "Enquire Now")}
+        buttonLabel={c("cta.button", "Book Appointment")}
       />
     </div>
   );

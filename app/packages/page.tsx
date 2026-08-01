@@ -7,6 +7,7 @@ import {
   Eyebrow,
   CtaBanner,
   BookButton,
+  StaticBookButton,
   SplitHero,
 } from "@/components/ui";
 import { images } from "@/lib/site";
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/packages" },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const whyChoose = [
   {
@@ -148,13 +149,13 @@ export default async function PackagesPage() {
                 </span>
               </div>
 
-              <BookButton
+              <StaticBookButton
                 variant="outline"
                 chevron={false}
                 className="mt-4 w-full"
               >
-                Enquire About This Package
-              </BookButton>
+                Book This Package
+              </StaticBookButton>
             </div>
           ))}
         </div>

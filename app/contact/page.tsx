@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const infoCards = [
   {
@@ -184,7 +184,7 @@ export default async function ContactPage() {
           "cta.subtitle",
           "Send us an enquiry today and let us take care of you with love and expertise."
         )}
-        buttonLabel={c("cta.button", "Enquire Now")}
+        buttonLabel={c("cta.button", "Book Appointment")}
       />
     </div>
   );

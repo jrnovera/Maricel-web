@@ -4,6 +4,7 @@ import { SplitHero, CtaBanner } from "@/components/ui";
 import ContactForm from "@/components/ContactForm";
 import { images, contact } from "@/lib/site";
 import { getHeroRows } from "@/lib/hero";
+import { getPageCopy } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -35,7 +36,10 @@ const infoCards = [
 ];
 
 export default async function ContactPage() {
-  const [hero] = await getHeroRows("contact");
+  const [[hero], c] = await Promise.all([
+    getHeroRows("contact"),
+    getPageCopy("contact"),
+  ]);
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     contact.address
   )}`;
@@ -108,7 +112,7 @@ export default async function ContactPage() {
           {/* Form */}
           <div className="rounded-2xl border border-pink-100 bg-blush-50/60 p-5 sm:p-8">
             <h2 className="font-display text-xl text-ink-900 sm:text-2xl">
-              Send Us a <span className="text-pink-500">Message</span>
+              {c("form.title", "Send Us a Message")}
             </h2>
             <div className="mt-6">
               <ContactForm />
@@ -122,11 +126,13 @@ export default async function ContactPage() {
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="font-display text-xl text-ink-900 sm:text-2xl">
-              Visit Our <span className="text-pink-500">Salon</span>
+              {c("visit.title", "Visit Our Salon")}
             </h2>
             <p className="mt-2 text-sm text-ink-500">
-              We&apos;d love to welcome you to Maricel Beauty Center. Find us
-              at our convenient location.
+              {c(
+                "visit.body",
+                "We'd love to welcome you to Maricel Beauty Center. Find us at our convenient location."
+              )}
             </p>
             <a
               href={mapsHref}
@@ -137,7 +143,7 @@ export default async function ContactPage() {
               <span className="flex flex-col items-center gap-2 text-pink-500">
                 <MapPin size={28} strokeWidth={1.5} />
                 <span className="text-xs font-medium text-ink-700 group-hover:text-pink-500">
-                  View on Google Maps
+                  {c("visit.mapButton", "View on Google Maps")}
                 </span>
               </span>
             </a>
@@ -145,7 +151,7 @@ export default async function ContactPage() {
 
           <div>
             <h2 className="font-display text-xl text-ink-900 sm:text-2xl">
-              Opening <span className="text-pink-500">Hours</span>
+              {c("hours.title", "Opening Hours")}
             </h2>
             <ul className="mt-5 space-y-3">
               {contact.hours.map((h) => (
@@ -162,7 +168,10 @@ export default async function ContactPage() {
             <div className="mt-5 flex items-start gap-3 rounded-xl bg-blush-50 px-5 py-4">
               <Clock size={16} className="mt-0.5 shrink-0 text-pink-400" />
               <p className="text-xs text-ink-500 sm:text-sm">
-                Walk-ins are welcome, but appointments are recommended.
+                {c(
+                  "hours.note",
+                  "Walk-ins are welcome, but appointments are recommended."
+                )}
               </p>
             </div>
           </div>
@@ -170,8 +179,12 @@ export default async function ContactPage() {
       </section>
 
       <CtaBanner
-        title="Ready to Feel Your Best?"
-        subtitle="Send us an enquiry today and let us take care of you with love and expertise."
+        title={c("cta.title", "Ready to Feel Your Best?")}
+        subtitle={c(
+          "cta.subtitle",
+          "Send us an enquiry today and let us take care of you with love and expertise."
+        )}
+        buttonLabel={c("cta.button", "Enquire Now")}
       />
     </div>
   );

@@ -5,13 +5,19 @@ import ServiceIcon from "@/components/ServiceIcon";
 import { SectionHeading, Eyebrow } from "@/components/ui";
 import { images, testimonials } from "@/lib/site";
 import { serviceGroups } from "@/lib/services-data";
+import { getGallery } from "@/lib/gallery";
+import type { PageCopy } from "@/lib/content";
 
 /**
  * The stack of marketing sections shared by the home and About pages —
  * both render the same sequence in the reference design.
+ *
+ * Every string here is overridable from the staff portal: `c(key, fallback)`
+ * returns the admin's copy when they have set one, and the wording below
+ * otherwise.
  */
 
-const whyChoose = [
+const whyChooseDefaults = [
   {
     icon: "expertise",
     title: "Expert Professionals",
@@ -35,13 +41,13 @@ const whyChoose = [
 ];
 
 /** Photo bleeds to the left edge, copy sits in the right column. */
-export function AboutIntro() {
+export function AboutIntro({ c }: { c: PageCopy }) {
   return (
     <section className="relative py-12 sm:py-16 lg:py-20">
       <div className="lg:grid lg:grid-cols-2 lg:items-center lg:gap-0">
         <div className="relative h-64 w-full sm:h-80 lg:ml-8 lg:h-[26rem]">
           <Image
-            src={images.interior}
+            src={c("about.image", images.interior)}
             alt="Inside Maricel Beauty Center"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -52,24 +58,28 @@ export function AboutIntro() {
 
         <div className="px-4 pt-8 sm:px-6 lg:px-12 lg:pt-0 xl:px-20">
           <div className="max-w-md">
-            <Eyebrow>ABOUT US</Eyebrow>
+            <Eyebrow>{c("about.eyebrow", "ABOUT US")}</Eyebrow>
             <div className="mt-2.5 h-px w-12 bg-pink-300" />
             <h2 className="mt-4 font-display text-2xl leading-tight text-ink-900 sm:text-3xl lg:text-4xl">
-              Your Premium Beauty Destination
+              {c("about.title", "Your Premium Beauty Destination")}
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-ink-500 sm:text-base">
-              At Maricel Beauty Center, we believe beauty is personal. Our expert
-              team is dedicated to providing exceptional services using premium
-              products in a relaxing, hygienic, and luxurious environment.
+              {c(
+                "about.body1",
+                "At Maricel Beauty Center, we believe beauty is personal. Our expert team is dedicated to providing exceptional services using premium products in a relaxing, hygienic, and luxurious environment."
+              )}
             </p>
             <p className="mt-3 text-sm leading-relaxed text-ink-500 sm:text-base">
-              Because you deserve to look and feel your best.
+              {c(
+                "about.body2",
+                "Because you deserve to look and feel your best."
+              )}
             </p>
             <Link
               href="/about"
               className="mt-7 inline-flex rounded-lg border border-pink-400 px-7 py-2.5 text-sm font-medium text-pink-500 transition-colors hover:bg-pink-500 hover:text-white"
             >
-              Learn More
+              {c("about.button", "Learn More")}
             </Link>
           </div>
         </div>
@@ -78,18 +88,18 @@ export function AboutIntro() {
   );
 }
 
-export function ServicesGrid() {
+export function ServicesGrid({ c }: { c: PageCopy }) {
   return (
     <section className="bg-blush-50 py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Our Services"
-          title="Enhance. Refresh. Glow."
+          eyebrow={c("services.eyebrow", "Our Services")}
+          title={c("services.title", "Enhance. Refresh. Glow.")}
           divider={false}
         />
 
         <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-6">
-          {serviceGroups.map((s) => (
+          {serviceGroups.slice(0, 6).map((s) => (
             <Link
               key={s.slug}
               href="/services"
@@ -113,7 +123,7 @@ export function ServicesGrid() {
             href="/services"
             className="inline-flex rounded-lg border border-pink-400 px-7 py-2.5 text-sm font-medium text-pink-500 transition-colors hover:bg-pink-500 hover:text-white"
           >
-            View All Services
+            {c("services.button", "View All Services")}
           </Link>
         </div>
       </div>
@@ -121,12 +131,56 @@ export function ServicesGrid() {
   );
 }
 
-export function SignaturePackagesBand() {
+/** Preview strip pulling the latest staff-uploaded gallery photos onto the home page. */
+export async function GalleryPreview() {
+  const items = (await getGallery()).slice(0, 6);
+
+  if (items.length === 0) return null;
+
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <SectionHeading
+        eyebrow="Our Gallery"
+        title="Beauty in Every Detail"
+        divider={false}
+      />
+
+      <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
+        {items.map((item, i) => (
+          <div
+            key={`${item.src}-${i}`}
+            className="relative aspect-square overflow-hidden rounded-xl"
+          >
+            <Image
+              src={item.src}
+              alt={item.caption}
+              fill
+              sizes="(max-width: 640px) 50vw, 33vw"
+              className="object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-10 text-center">
+        <Link
+          href="/gallery"
+          className="inline-flex rounded-lg border border-pink-400 px-7 py-2.5 text-sm font-medium text-pink-500 transition-colors hover:bg-pink-500 hover:text-white"
+        >
+          View Full Gallery
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+export function SignaturePackagesBand({ c }: { c: PageCopy }) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <div className="relative overflow-hidden rounded-2xl">
         <Image
-          src={images.spaTowels}
+          src={c("packages.image", images.spaTowels)}
           alt=""
           fill
           sizes="100vw"
@@ -136,21 +190,22 @@ export function SignaturePackagesBand() {
         <div className="absolute inset-0 bg-gradient-to-r from-ink-900/85 via-ink-900/60 to-ink-900/20" />
         <div className="relative px-6 py-14 sm:px-12 sm:py-20">
           <p className="text-[11px] font-semibold tracking-[0.25em] text-pink-200">
-            SIGNATURE PACKAGES
+            {c("packages.eyebrow", "SIGNATURE PACKAGES")}
           </p>
-          <h2 className="mt-3 max-w-md font-display text-2xl leading-tight text-white sm:text-4xl">
-            Pamper Yourself,
-            <br />
-            Love Your Glow
+          <h2 className="mt-3 max-w-md whitespace-pre-line font-display text-2xl leading-tight text-white sm:text-4xl">
+            {c("packages.title", "Pamper Yourself,\nLove Your Glow")}
           </h2>
           <p className="mt-4 max-w-sm text-sm text-white/75 sm:text-base">
-            Curated packages for your beauty, relaxation, and total confidence.
+            {c(
+              "packages.body",
+              "Curated packages for your beauty, relaxation, and total confidence."
+            )}
           </p>
           <Link
             href="/packages"
             className="mt-7 inline-flex rounded-lg bg-pink-500 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-pink-600"
           >
-            Explore Packages
+            {c("packages.button", "Explore Packages")}
           </Link>
         </div>
       </div>
@@ -158,16 +213,22 @@ export function SignaturePackagesBand() {
   );
 }
 
-export function WhyChooseMbc() {
+export function WhyChooseMbc({ c }: { c: PageCopy }) {
+  const items = whyChooseDefaults.map((w, i) => ({
+    icon: w.icon,
+    title: c(`why.item${i + 1}.title`, w.title),
+    desc: c(`why.item${i + 1}.desc`, w.desc),
+  }));
+
   return (
     <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
       <div className="text-center">
-        <Eyebrow>WHY CHOOSE MARICEL BEAUTY CENTER</Eyebrow>
+        <Eyebrow>{c("why.heading", "WHY CHOOSE MARICEL BEAUTY CENTER")}</Eyebrow>
         <div className="mx-auto mt-2.5 h-px w-12 bg-pink-300" />
       </div>
 
       <div className="mt-10 grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
-        {whyChoose.map((w) => (
+        {items.map((w) => (
           <div key={w.title} className="text-center">
             <span className="mx-auto flex h-14 w-14 items-center justify-center text-pink-500">
               <ServiceIcon name={w.icon} size={32} />

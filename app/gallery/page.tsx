@@ -2,10 +2,10 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { SplitHero, CtaBanner, Eyebrow } from "@/components/ui";
 import GalleryGrid from "@/components/GalleryGrid";
-import { images, founder, galleryItems, type GalleryEntry } from "@/lib/site";
-import { createAdminClient } from "@/lib/supabase/admin";
-import type { MbcGalleryItem } from "@/lib/db";
+import { images, founder } from "@/lib/site";
+import { getGallery } from "@/lib/gallery";
 import { getHeroRows } from "@/lib/hero";
+import { getPageCopy } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -16,41 +16,24 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const moments = [
-  { src: images.interior, alt: "Maricel Beauty Center reception" },
-  { src: images.skincare, alt: "Products and flowers at the salon" },
-  { src: images.bridal, alt: "Stylist working with a client" },
+const momentsDefaults = [
+  { key: "moments.image1", src: images.interior, alt: "Maricel Beauty Center reception" },
+  { key: "moments.image2", src: images.skincare, alt: "Products and flowers at the salon" },
+  { key: "moments.image3", src: images.bridal, alt: "Stylist working with a client" },
 ];
-
-/** Staff-uploaded photos win; the curated stock set stands in until then. */
-async function getGallery(): Promise<GalleryEntry[]> {
-  try {
-    const { data } = await createAdminClient()
-      .from("mbc_gallery")
-      .select("id, image, caption, category")
-      .eq("is_active", true)
-      .order("sort_order", { ascending: true })
-      .order("created_at", { ascending: false });
-
-    const rows = (data ?? []) as MbcGalleryItem[];
-    if (rows.length === 0) return galleryItems;
-
-    return rows.map((r) => ({
-      src: r.image,
-      caption: r.caption,
-      category: r.category,
-    }));
-  } catch {
-    return galleryItems;
-  }
-}
 
 export default async function GalleryPage() {
   const { name: founderName } = founder;
-  const [items, [hero]] = await Promise.all([
+  const [items, [hero], c] = await Promise.all([
     getGallery(),
     getHeroRows("gallery"),
+    getPageCopy("gallery"),
   ]);
+
+  const moments = momentsDefaults.map((m) => ({
+    src: c(m.key, m.src),
+    alt: m.alt,
+  }));
 
   return (
     <div>
@@ -84,26 +67,28 @@ export default async function GalleryPage() {
       <section className="bg-blush-50 py-16 sm:py-20">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
           <div>
-            <Eyebrow>Inside Maricel Beauty Center</Eyebrow>
+            <Eyebrow>{c("moments.eyebrow", "Inside Maricel Beauty Center")}</Eyebrow>
             <h2 className="mt-3 font-display text-2xl leading-tight text-pink-500 sm:text-3xl lg:text-4xl">
-              Moments at MBC
+              {c("moments.title", "Moments at MBC")}
             </h2>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-ink-500 sm:text-base">
-              Every corner of MBC is designed with love and attention to
-              detail — to make you feel beautiful, relaxed, and cared for.
+              {c(
+                "moments.body",
+                "Every corner of MBC is designed with love and attention to detail — to make you feel beautiful, relaxed, and cared for."
+              )}
             </p>
             <p className="mt-8 font-display text-xl text-ink-900">
               {founderName.split(" ")[0]} ♡
             </p>
             <p className="text-xs font-semibold tracking-[0.15em] text-pink-500">
-              FOUNDER
+              {c("moments.founderLabel", "FOUNDER")}
             </p>
           </div>
 
           <div className="grid grid-cols-3 gap-3 sm:gap-4">
-            {moments.map((m) => (
+            {moments.map((m, i) => (
               <div
-                key={m.src}
+                key={i}
                 className="relative aspect-[3/4] overflow-hidden rounded-xl"
               >
                 <Image
@@ -121,8 +106,12 @@ export default async function GalleryPage() {
       </section>
 
       <CtaBanner
-        title="Ready to experience beauty with care?"
-        subtitle="Send us an enquiry today and let us bring out the best in you."
+        title={c("cta.title", "Ready to experience beauty with care?")}
+        subtitle={c(
+          "cta.subtitle",
+          "Send us an enquiry today and let us bring out the best in you."
+        )}
+        buttonLabel={c("cta.button", "Enquire Now")}
       />
     </div>
   );

@@ -6,7 +6,14 @@ export type NavItem = {
 
 export const nav: NavItem[] = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
+  {
+    href: "/about",
+    label: "About Us",
+    children: [
+      { href: "/about", label: "About Us" },
+      { href: "/reviews", label: "Reviews" },
+    ],
+  },
   { href: "/services", label: "Services" },
   { href: "/packages", label: "Packages" },
   {
@@ -28,13 +35,16 @@ export const siteUrl =
 export const siteName = "Maricel Beauty Center";
 
 export const contact = {
-  phone: "+971 50 123 4567",
-  phoneHref: "tel:+971501234567",
-  email: "info@maricelbeauty.ae",
-  address: "Dubai, United Arab Emirates",
-  lat: 25.398184,
-  lng: 55.520521,
-  mapsUrl: "https://maps.google.com/?q=25.398184,55.520521",
+  phone: "050 420 3621",
+  phoneHref: "tel:+971504203621",
+  phone2: "050 704 6489",
+  phone2Href: "tel:+971507046489",
+  email: "info@maricel.ae",
+  email2: "salon@maricel.ae",
+  address: "Villa 1, Humaideya 1, Sheikh Maktoum Bin Rashid St, Ajman - United Arab Emirates",
+  lat: 25.427262,
+  lng: 55.462891,
+  mapsUrl: "https://maps.google.com/?q=25.427262,55.462891",
   hours: [
     { days: "Monday – Saturday", time: "10:00 AM – 8:00 PM" },
     { days: "Sunday", time: "12:00 PM – 6:00 PM" },
@@ -396,32 +406,66 @@ export const careerRoles: {
 
 export const testimonials = [
   {
-    name: "Amira Al Farsi",
-    role: "Regular Client",
+    name: "Angela D.",
+    role: "Skin Care Treatment",
     quote:
-      "Maricel Beauty Center is my monthly reset. The team is so attentive and the results always exceed what I imagined.",
+      "Amazing experience! The staff are so professional and kind. My skin has never felt better.",
     rating: 5,
     image:
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
   },
   {
-    name: "Sofia Martinez",
-    role: "Bridal Client",
+    name: "Maria C.",
+    role: "Nail Art",
     quote:
-      "They did my bridal makeup and hair — I felt like the best version of myself on my wedding day. Truly grateful!",
+      "I love my nails! The nail technicians are very detailed and creative. Highly recommended!",
+    rating: 5,
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    name: "Liza M.",
+    role: "Massage Therapy",
+    quote:
+      "Best massage I've ever had. So relaxing and helped relieve my stress.",
     rating: 5,
     image:
       "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=200&q=80",
   },
   {
-    name: "Grace Tan",
-    role: "Facial & Skincare",
+    name: "Jenny P.",
+    role: "Hair Treatment",
     quote:
-      "The facials here are next level. Clean, relaxing space and products that actually work. Highly recommend.",
+      "The salon is clean, elegant and the service is top-notch. Will definitely come back!",
     rating: 5,
     image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
   },
+  {
+    name: "Rhea S.",
+    role: "Hair Color & Styling",
+    quote:
+      "My hair color and blow dry turned out perfect! Thank you so much!",
+    rating: 5,
+    image:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    name: "Claire T.",
+    role: "Full Beauty Package",
+    quote:
+      "I always leave this place feeling confident and beautiful!",
+    rating: 5,
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
+  },
+];
+
+export const reviewStats = [
+  { label: "Average Rating", value: "4.9", icon: "star" },
+  { label: "Happy Reviews", value: "1,250+", icon: "chat" },
+  { label: "Would Recommend Us", value: "98%", icon: "heart" },
+  { label: "Happy Clients", value: "5,000+", icon: "person" },
 ];
 
 export const brands = [

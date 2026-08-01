@@ -116,9 +116,10 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile / tablet drawer */}
+      {/* Mobile / tablet drawer — fixed so it always sits right below the
+          sticky header as a full overlay, regardless of scroll position. */}
       {open && (
-        <div className="border-t border-pink-100 bg-white lg:hidden">
+        <div className="fixed inset-x-0 top-16 z-40 max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-pink-100 bg-white shadow-lg lg:hidden">
           <nav className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
             {nav.map((item) => {
               if (item.children) {

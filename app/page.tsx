@@ -9,6 +9,7 @@ import {
 import BrandsMarquee from "@/components/BrandsMarquee";
 import { images } from "@/lib/site";
 import { getHeroRows } from "@/lib/hero";
+import { getPageCopy } from "@/lib/content";
 
 export const dynamic = "force-dynamic";
 
@@ -40,7 +41,10 @@ const fallbackSlides: Slide[] = [
 ];
 
 export default async function Home() {
-  const rows = await getHeroRows("home");
+  const [rows, c] = await Promise.all([
+    getHeroRows("home"),
+    getPageCopy("home"),
+  ]);
   const slides: Slide[] =
     rows.length > 0
       ? rows.map((r) => ({
@@ -56,15 +60,19 @@ export default async function Home() {
   return (
     <div>
       <HeroCarousel slides={slides} />
-      <AboutIntro />
-      <ServicesGrid />
+      <AboutIntro c={c} />
+      <ServicesGrid c={c} />
       <BrandsMarquee />
-      <SignaturePackagesBand />
-      <WhyChooseMbc />
+      <SignaturePackagesBand c={c} />
+      <WhyChooseMbc c={c} />
 
       <CtaBanner
-        title="Ready to Reveal Your Best?"
-        subtitle="Send us an enquiry today and let us take care of you."
+        title={c("cta.title", "Ready to Reveal Your Best?")}
+        subtitle={c(
+          "cta.subtitle",
+          "Send us an enquiry today and let us take care of you."
+        )}
+        buttonLabel={c("cta.button", "Enquire Now")}
       />
     </div>
   );

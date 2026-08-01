@@ -4,6 +4,7 @@ import { PageHero, CtaBanner } from "@/components/ui";
 import { images, brands } from "@/lib/site";
 import { serviceGroups, type ServiceGroup } from "@/lib/services-data";
 import { getHeroRows } from "@/lib/hero";
+import { getPageCopy } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services & Price List",
@@ -67,7 +68,10 @@ function PriceCard({
 }
 
 export default async function ServicesPage() {
-  const [hero] = await getHeroRows("services");
+  const [[hero], c] = await Promise.all([
+    getHeroRows("services"),
+    getPageCopy("services"),
+  ]);
 
   return (
     <div>
@@ -104,7 +108,7 @@ export default async function ServicesPage() {
             <span>✦</span>
           </div>
           <p className="text-center text-[11px] font-semibold tracking-[0.25em] text-pink-600 sm:text-xs">
-            OUR PROFESSIONAL BEAUTY BRANDS
+            {c("brands.heading", "OUR PROFESSIONAL BEAUTY BRANDS")}
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:gap-x-8">
             {brands.map((b, i) => (
@@ -123,9 +127,12 @@ export default async function ServicesPage() {
 
       <div className="pt-14 sm:pt-20">
         <CtaBanner
-          title="Ready to look and feel your best?"
-          subtitle="Send us an enquiry today and let our experts pamper you with the care you deserve."
-          buttonLabel="ENQUIRE NOW"
+          title={c("cta.title", "Ready to look and feel your best?")}
+          subtitle={c(
+            "cta.subtitle",
+            "Send us an enquiry today and let our experts pamper you with the care you deserve."
+          )}
+          buttonLabel={c("cta.button", "ENQUIRE NOW")}
           variant="deep"
         />
       </div>

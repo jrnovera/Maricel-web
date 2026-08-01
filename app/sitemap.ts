@@ -14,6 +14,7 @@ const staticPaths = [
   "/gallery",
   "/blog",
   "/contact",
+  "/reviews",
 ];
 
 async function getPostEntries(): Promise<MetadataRoute.Sitemap> {

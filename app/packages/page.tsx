@@ -12,6 +12,7 @@ import {
 import { images } from "@/lib/site";
 import { packages, bridalLuxury } from "@/lib/services-data";
 import { getHeroRows } from "@/lib/hero";
+import { getPageCopy } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Packages",
@@ -48,7 +49,16 @@ const whyChoose = [
 const bridalIcons = [Check, Star, Sparkles, Heart];
 
 export default async function PackagesPage() {
-  const [hero] = await getHeroRows("packages");
+  const [[hero], c] = await Promise.all([
+    getHeroRows("packages"),
+    getPageCopy("packages"),
+  ]);
+
+  const whyCards = whyChoose.map((w, i) => ({
+    icon: w.icon,
+    title: c(`why.item${i + 1}.title`, w.title),
+    desc: c(`why.item${i + 1}.desc`, w.desc),
+  }));
 
   return (
     <div>
@@ -84,11 +94,12 @@ export default async function PackagesPage() {
 
       {/* Intro */}
       <section className="mx-auto max-w-7xl px-4 pt-14 text-center sm:px-6 sm:pt-20 lg:px-8">
-        <Eyebrow>BEAUTY. CONVENIENCE. VALUE.</Eyebrow>
+        <Eyebrow>{c("intro.eyebrow", "BEAUTY. CONVENIENCE. VALUE.")}</Eyebrow>
         <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-ink-500 sm:text-base">
-          Our packages are designed to give you a complete head-to-toe
-          experience, combining our most popular treatments in one seamless
-          session. Save time, enjoy better value, and leave feeling renewed.
+          {c(
+            "intro.body",
+            "Our packages are designed to give you a complete head-to-toe experience, combining our most popular treatments in one seamless session. Save time, enjoy better value, and leave feeling renewed."
+          )}
         </p>
       </section>
 
@@ -98,8 +109,8 @@ export default async function PackagesPage() {
         className="mx-auto max-w-7xl scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20 lg:px-8"
       >
         <SectionHeading
-          eyebrow="Our Packages"
-          title="Choose Your Perfect Experience"
+          eyebrow={c("list.eyebrow", "Our Packages")}
+          title={c("list.title", "Choose Your Perfect Experience")}
           divider={false}
         />
 
@@ -155,7 +166,7 @@ export default async function PackagesPage() {
           <div className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
             <div className="relative aspect-[4/3] lg:aspect-auto">
               <Image
-                src={images.bridal}
+                src={c("bridal.image", images.bridal)}
                 alt="Bride prepared by Maricel Beauty Center"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
@@ -212,12 +223,12 @@ export default async function PackagesPage() {
       {/* Why choose our packages */}
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
         <div className="text-center">
-          <Eyebrow>WHY CHOOSE OUR PACKAGES</Eyebrow>
+          <Eyebrow>{c("why.heading", "WHY CHOOSE OUR PACKAGES")}</Eyebrow>
           <div className="mx-auto mt-2.5 h-0.5 w-10 rounded-full bg-pink-300" />
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
-          {whyChoose.map((w) => (
+          {whyCards.map((w) => (
             <div key={w.title} className="text-center">
               <span className="mx-auto flex h-14 w-14 items-center justify-center text-pink-500">
                 <ServiceIcon name={w.icon} size={32} />
@@ -234,9 +245,12 @@ export default async function PackagesPage() {
       </section>
 
       <CtaBanner
-        title="Ready to Pamper Yourself?"
-        subtitle="Enquire about your favorite package today and let us take care of you."
-        buttonLabel="Enquire About a Package"
+        title={c("cta.title", "Ready to Pamper Yourself?")}
+        subtitle={c(
+          "cta.subtitle",
+          "Enquire about your favorite package today and let us take care of you."
+        )}
+        buttonLabel={c("cta.button", "Enquire About a Package")}
       />
     </div>
   );

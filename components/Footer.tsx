@@ -108,23 +108,33 @@ export default function Footer() {
               CONTACT US
             </h3>
             <ul className="space-y-1.5 text-[13px] text-ink-500">
-              <li>
-                <a
-                  href={contact.phoneHref}
-                  className="flex items-start gap-1.5 hover:text-pink-500"
-                >
-                  <Phone size={13} className="mt-0.5 shrink-0 text-pink-400" />
-                  {contact.phone}
-                </a>
+              <li className="flex items-start gap-1.5">
+                <Phone size={13} className="mt-0.5 shrink-0 text-pink-400" />
+                <span className="flex flex-col">
+                  <a href={contact.phoneHref} className="hover:text-pink-500">
+                    {contact.phone}
+                  </a>
+                  <a href={contact.phone2Href} className="hover:text-pink-500">
+                    {contact.phone2}
+                  </a>
+                </span>
               </li>
-              <li>
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="flex items-start gap-1.5 break-all hover:text-pink-500"
-                >
-                  <Mail size={13} className="mt-0.5 shrink-0 text-pink-400" />
-                  {contact.email}
-                </a>
+              <li className="flex items-start gap-1.5">
+                <Mail size={13} className="mt-0.5 shrink-0 text-pink-400" />
+                <span className="flex flex-col">
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="break-all hover:text-pink-500"
+                  >
+                    {contact.email}
+                  </a>
+                  <a
+                    href={`mailto:${contact.email2}`}
+                    className="break-all hover:text-pink-500"
+                  >
+                    {contact.email2}
+                  </a>
+                </span>
               </li>
               <li>
                 <a
